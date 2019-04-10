@@ -5,9 +5,12 @@ usethis::use_build_ignore("rsconnect")
 usethis::use_git_ignore("docs/")
 usethis::use_git_ignore("rsconnect/")
 # usethis::create_package(".")
+usethis::use_git()
+usethis::use_data_raw()
+usethis::use_package_doc()
+usethis::use_r("datasets")
 
 # description ----
-
 library(desc)
 unlink("DESCRIPTION")
 my_desc <- description$new("!new")
@@ -56,7 +59,7 @@ usethis::use_readme_rmd()
 # _News
 usethis::use_news_md()
 # _Vignette
-usethis::use_vignette("aa-data-exploration")
+usethis::use_vignette("aa-ggplot2-themes-and-palettes")
 usethis::use_vignette("ab-model")
 devtools::build_vignettes()
 

@@ -5,3 +5,4 @@
 ^\.gitlab-ci\.yml$
 ^ci$
 ^README\.Rmd$
+^data-raw$
