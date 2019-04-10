@@ -1,38 +1,37 @@
----
-output: github_document
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "man/figures/README-",
-  out.width = "100%"
-)
-```
 # drealthemes
 
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 The goal of drealthemes is to proporse olor palettes and ggplot2 themes.
 
 ## Installation
 
-You can install the released version of drealthemes from archive file (Please adapt version number to yours):
+You can install the released version of drealthemes from archive file
+(Please adapt version number to yours):
 
-```{r, eval=FALSE}
+``` r
 # install.packages("remotes")
 remotes::install_local("drealthemes_0.0.0.tar.gz")
 ```
 
 ## Example
 
-```{r example}
+``` r
 library(drealthemes)
 library(dplyr)
+#> 
+#> Attaching package: 'dplyr'
+#> The following objects are masked from 'package:stats':
+#> 
+#>     filter, lag
+#> The following objects are masked from 'package:base':
+#> 
+#>     intersect, setdiff, setequal, union
 library(ggplot2)
 
 data(dreal_colors)
@@ -50,3 +49,5 @@ tibble(
   guides(fill = FALSE) +
   theme_void()
 ```
+
+<img src="man/figures/README-example-1.png" width="100%" />
