@@ -1,0 +1,24 @@
+Package: drealthemes
+Title: Themes for DREAL plots
+Version: 0.0.0.9000
+Authors@R: 
+    c(person(given = "Sebastien",
+             family = "Rochette",
+             role = c("aut", "cre"),
+             email = "sebastien@thinkr.fr",
+             comment = c(ORCID = "0000-0002-1565-9313")),
+      person(given = "Colin",
+             family = "Fay",
+             role = "aut",
+             email = "colin@thinkr.fr",
+             comment = c(ORCID = "0000-0001-7343-1846")),
+      person(given = "DREAL",
+             role = "cph"))
+Description: Color palettes and ggplot2 themes.
+License: MIT + file LICENSE
+Imports: 
+    magrittr
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 6.1.1
