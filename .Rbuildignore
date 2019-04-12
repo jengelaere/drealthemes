@@ -6,3 +6,4 @@
 ^ci$
 ^README\.Rmd$
 ^data-raw$
+^rsconnect$

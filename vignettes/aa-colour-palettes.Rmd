@@ -1,0 +1,135 @@
+---
+title: "colour palettes"
+output: 
+  rmarkdown::html_vignette:
+    css: uikit.css
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{aa-colour-palettes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = FALSE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 7,
+  fig.align = "center"
+)
+rsconnect <- TRUE
+# Copy css from inst
+if (FALSE) {
+  # devtools::load_all()
+  file.copy(system.file("css/uikit.css", package = "drealthemes"), "uikit.css")
+  file.copy("R/palettes.R", "vignettes/palettes.R", overwrite = TRUE) # Avant rsconnect
+  file.copy("R/ggplot2-functions.R", "vignettes/ggplot2-functions.R", overwrite = TRUE) # Avant rsconnect
+}
+if (rsconnect) {
+ source("palettes.R")
+ source("ggplot2-functions.R")
+}
+```
+
+## Packages
+```{r message=FALSE, warning=FALSE}
+library(drealthemes) # Functions are in this package # Uncomment if not rsconnect
+library(ggplot2)
+library(dplyr)
+
+# Main theme
+theme_set(theme_minimal())
+```
+
+
+## Palettes
+```{r}
+# show complete palette of main colors
+show_pal(cols = dreal_main_colors(), nrow = 6, ncol = 3, show_text = TRUE)
+# list palettes
+list_dreal_pals()
+```
+
+## Functions
+Use extraction function directly
+```{r}
+# named colors
+dreal_cols()
+dreal_cols("primary")
+dreal_cols("primary_active", "danger")
+
+# directly in a plot
+ggplot(mtcars, aes(hp, mpg)) +
+    geom_point(color = dreal_cols()[1],
+               size = 4, alpha = .8) +
+  ggtitle("Simple graph") +
+  theme_dreal()
+```
+
+### Combine colors into palettes 
+
+```{r, fig.height = 4, fig.width = 6}
+# named palettes
+dreal_pal("continuous")(6)
+dreal_pal("discrete")(6)
+# show palettes
+show_pal(cols = dreal_pal("continuous")(6), show_text = FALSE)
+show_pal(cols = dreal_pal("discrete")(6), show_text = FALSE)
+show_pal(cols = dreal_pal("discrete2")(6), show_text = FALSE)
+```
+
+### Test default palettes in ggplot
+```{r}
+# Color by discrete variable using default palette
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
+    geom_point(size = 4) +
+    scale_color_dreal_d() +
+    ggtitle("Figure with scale_color_dreal_d")  
+
+# Fill by discrete variable using default palette
+mtcars %>% 
+  group_by(gear, carb = as.character(carb)) %>% 
+  summarise(n = n()) %>% 
+  ggplot() +
+  geom_col(aes(gear, n, fill = carb), position = position_fill()) +
+  scale_fill_dreal_d()
+
+# Color by numeric variable with default palette
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
+    geom_point(size = 4) +
+    scale_color_dreal_c()
+
+# Color by discrete variable with default palette
+ggplot(iris, aes(Sepal.Width, fill = Species)) +
+    geom_histogram(size = 4, bins = 20) +
+    scale_fill_dreal_d()
+```
+
+### Test other palettes in ggplot
+```{r}
+# Color by discrete variable using default palette
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
+    geom_point(size = 4) +
+    scale_color_dreal_d(palette = "normal")
+
+# Fill by discrete variable using default palette
+mtcars %>% 
+  group_by(gear, carb = as.character(carb)) %>% 
+  summarise(n = n()) %>% 
+  ggplot() +
+  geom_col(aes(gear, n, fill = carb), position = position_fill()) +
+  scale_fill_dreal_d(reverse = TRUE)
+
+# Color by numeric variable with default palette
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
+    geom_point(size = 4) +
+    scale_color_dreal_c("secondary", reverse = TRUE)
+
+# Fill by discrete variable with different palette + remove legend (guide)
+ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
+    geom_bar() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    scale_fill_dreal_d(palette = "discrete_long", guide = "none")
+```
+

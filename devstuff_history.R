@@ -59,8 +59,8 @@ usethis::use_readme_rmd()
 # _News
 usethis::use_news_md()
 # _Vignette
-usethis::use_vignette("aa-ggplot2-themes-and-palettes")
-usethis::use_vignette("ab-model")
+usethis::use_vignette("aa-colour-palettes")
+usethis::use_vignette("ab-ggplot2-themes")
 devtools::build_vignettes()
 
 # _Book
