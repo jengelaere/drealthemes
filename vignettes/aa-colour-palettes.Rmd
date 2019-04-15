@@ -63,8 +63,7 @@ dreal_cols("primary_active", "danger")
 ggplot(mtcars, aes(hp, mpg)) +
     geom_point(color = dreal_cols()[1],
                size = 4, alpha = .8) +
-  ggtitle("Simple graph") +
-  theme_dreal()
+  ggtitle("Simple graph")
 ```
 
 ### Combine colors into palettes 
@@ -124,7 +123,7 @@ mtcars %>%
 # Color by numeric variable with default palette
 ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
     geom_point(size = 4) +
-    scale_color_dreal_c("secondary", reverse = TRUE)
+    scale_color_dreal_c(palette = "secondary", reverse = TRUE)
 
 # Fill by discrete variable with different palette + remove legend (guide)
 ggplot(mpg, aes(manufacturer, fill = manufacturer)) +

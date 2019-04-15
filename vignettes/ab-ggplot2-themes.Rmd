@@ -1,0 +1,205 @@
+---
+title: "ggplot2 themes"
+output: 
+  rmarkdown::html_vignette:
+    css: uikit.css
+    toc: true
+vignette: >
+  %\VignetteIndexEntry{aa-ggplot2-themes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = FALSE,
+  comment = "#>",
+  fig.width = 7,
+  fig.height = 7,
+  fig.align = "center"
+)
+rsconnect <- TRUE
+# Copy css from inst
+if (FALSE) {
+  # devtools::load_all()
+  file.copy(system.file("css/uikit.css", package = "drealthemes"), "uikit.css")
+  file.copy("R/palettes.R", "vignettes/palettes.R", overwrite = TRUE) # Avant rsconnect
+  file.copy("R/ggplot2-functions.R", "vignettes/ggplot2-functions.R", overwrite = TRUE) # Avant rsconnect
+}
+if (rsconnect) {
+ source("palettes.R")
+ source("ggplot2-functions.R")
+}
+```
+
+## Packages
+```{r message=FALSE, warning=FALSE}
+library(drealthemes) # Functions are in this package # Uncomment if not rsconnect
+library(ggplot2)
+library(dplyr)
+```
+
+## Theme 1
+```{r}
+theme_dreal <- function(legend.position = "bottom", ...) {
+
+  # legend.position == "bottom"
+  theme_minimal() +
+    theme(
+      title = element_text(colour = "white", face = "bold"),
+      axis.text = element_text(colour = "white", margin = margin(t = 1, r = 50),
+                               hjust = 0),
+      
+      legend.position = legend.position,
+      legend.justification = "left",
+      legend.background = element_rect(fill = dreal_cols("primary_active"), colour = NA),
+      legend.title = element_text(colour = "white", face = "plain"), 
+      legend.text = element_text(colour = "white"),
+      plot.background = element_rect(fill = dreal_cols("primary_active")),
+      panel.background = element_rect(fill = "white"),
+      strip.background = element_rect(fill = dreal_cols("primary")),
+      
+      strip.text = element_text(colour = "white"),
+      
+      panel.grid.minor = element_blank(),
+      panel.grid.major.y = element_line(linetype = "dashed",
+                                        colour = dreal_cols("info_light")),
+      panel.grid.major.x = element_line(colour = dreal_cols("info_light")),
+      ...
+    )
+  
+}
+
+# directly in a plot
+ggplot(mtcars, aes(hp, mpg, colour = as.character(gear))) +
+    geom_point(
+               size = 4, alpha = .8) +
+  scale_color_dreal_d() +
+  ggtitle("Simple graph") +
+  theme_dreal() +
+  labs(caption = "Source: DREAL")
+
+# facte plot
+ggplot(mtcars, aes(hp, mpg, colour = as.character(gear))) +
+    geom_point(
+               size = 4, alpha = .8) +
+  scale_color_dreal_d() +
+  facet_wrap(vars(carb)) +
+  ggtitle("Facets graph") +
+  theme_dreal() +
+  labs(caption = "Source: DREAL")
+```
+
+## Theme 2 with annotations
+```{r}
+theme_dreal_annotation <- function(legend.position = "bottom", my_title = "Mon titre de graphique", ...) {
+  
+  # browser()
+  title <- ggplot() + ggtitle(my_title)
+    # labs(caption = "Source: DREAL")
+      
+  # legend.position == "bottom"
+  list(
+    ggtitle(my_title),
+    theme_minimal() +
+      theme(
+      title = element_text(colour = "white", face = "bold"),
+      axis.text = element_text(colour = "white", margin = margin(t = 1, r = 50),
+                               hjust = 0),
+      
+      legend.position = legend.position,
+      legend.justification = "left",
+      legend.background = element_rect(fill = dreal_cols("primary_active"), colour = NA),
+      legend.title = element_text(colour = "white", face = "plain"), 
+      legend.text = element_text(colour = "white"),
+      plot.background = element_rect(fill = dreal_cols("primary_active")),
+      panel.background = element_rect(fill = "white"),
+      strip.background = element_rect(fill = dreal_cols("primary")),
+      
+      strip.text = element_text(colour = "white"),
+      
+      panel.grid.minor = element_blank(),
+      panel.grid.major.y = element_line(linetype = "dashed",
+                                        colour = dreal_cols("info_light")),
+      panel.grid.major.x = element_line(colour = dreal_cols("info_light")),
+      ...
+    ),
+    
+    annotation_custom(
+      ggplotGrob(title),
+      xmin = -Inf,
+      xmax = Inf,
+      ymin = -Inf,
+      ymax = Inf
+    )
+  )
+}
+
+# directly in a plot
+ggplot(mtcars, aes(hp, mpg, colour = as.character(gear))) +
+    geom_point(
+               size = 4, alpha = .8) +
+  scale_color_dreal_d() +
+  theme_dreal_annotation()
+
+```
+
+## theme with multiplot
+
+```{r, eval=FALSE}
+
+drealize <- function(g, legend.position = "bottom", ...) {
+
+  # legend.position == "bottom"
+  theme_list <- list(
+    theme_minimal() +
+      theme(
+      title = element_text(colour = "white", face = "bold"),
+      axis.text = element_text(colour = "white", margin = margin(t = 1, r = 50),
+                               hjust = 0),
+      
+      legend.position = legend.position,
+      legend.justification = "left",
+      legend.background = element_rect(fill = dreal_cols("primary_active"), colour = NA),
+      legend.title = element_text(colour = "white", face = "plain"), 
+      legend.text = element_text(colour = "white"),
+      plot.background = element_rect(fill = dreal_cols("primary_active")),
+      panel.background = element_rect(fill = "white"),
+      strip.background = element_rect(fill = dreal_cols("primary")),
+      
+      strip.text = element_text(colour = "white"),
+      
+      panel.grid.minor = element_blank(),
+      panel.grid.major.y = element_line(linetype = "dashed",
+                                        colour = dreal_cols("info_light")),
+      panel.grid.major.x = element_line(colour = dreal_cols("info_light")),
+      ...
+    )
+  )
+  
+  g_theme <- g + theme_list
+  browser()
+  ## Get the title style from the original plot
+  g_dim <- ggplotGrob(g_theme)
+  title_style <- g_dim$gp[[which(g_dim$layout$name == "title")]]$gp
+  
+  my_g <- grobTree(rectGrob(gb = gpar(fill = "green")),
+                   textGrob("Title of the plot", x = 0.5, hjust = 0.5,
+                            gp = gpar(col = "white", cex = 1.5)))
+  grid.arrange(my_g, g_theme, heights = c(1, 9))
+}
+
+
+# directly in a plot
+g <- ggplot(mtcars, aes(hp, mpg, colour = as.character(gear))) +
+    geom_point(
+               size = 4, alpha = .8) +
+  scale_color_dreal_d() +
+  ggtitle("Simple graph") +
+  theme_dreal() +
+  labs(caption = "Source: DREAL")
+
+drealize(g)
+
+```
+

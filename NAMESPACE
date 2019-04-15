@@ -2,6 +2,7 @@
 
 export("%>%")
 export(dreal_cols)
+export(dreal_main_colors)
 export(dreal_pal)
 export(list_dreal_pals)
 export(scale_color_dreal_c)
