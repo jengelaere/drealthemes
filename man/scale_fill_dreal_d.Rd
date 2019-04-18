@@ -17,6 +17,7 @@ scale_fill_dreal_d(..., palette = "discrete", reverse = FALSE)
 Discrete fill scale constructor for dreal colors
 }
 \examples{
+library(ggplot2)
 ggplot(iris, aes(Sepal.Width, fill = Species)) +
   geom_histogram(size = 4, bins = 20) +
   scale_fill_dreal_d()

@@ -51,3 +51,24 @@ tibble(
 ```
 
 <img src="man/figures/README-example-1.png" width="100%" />
+
+## Thème avec `drealize`
+
+C’est le format le plus proche de la proposition graphique. Cependant,
+il ne fonctionne pas comme un theme classique. Il nécessite d’ajouter
+une fonction `drealize()` à chaque graphique à la place de l’écriture du
+titre.
+
+``` r
+# directly in a plot
+g <- ggplot(mtcars, aes(hp, mpg, colour = as.character(gear))) +
+    geom_point(size = 4, alpha = .8) +
+  scale_color_dreal_d()
+
+g2 <- drealize(g, 
+         title = "Plot created with drealize()",
+         caption = "Source: DREAL",
+         legend.position = "bottom")
+```
+
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />

@@ -1,4 +1,13 @@
-pre {
+body {
+    max-width: 1024px;
+    margin: 0 auto;
+}
+
+code {
+    background-color: #e3e3e3; /* Added by SEB */
+}
+
+pre, pre code {
   background: #292b2c;
   color: white; /* Added by SEB */
 }

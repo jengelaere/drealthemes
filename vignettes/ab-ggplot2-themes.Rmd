@@ -1,11 +1,11 @@
 ---
 title: "ggplot2 themes"
-output: 
+output:
   rmarkdown::html_vignette:
     css: uikit.css
-    toc: true
+    toc: yes
 vignette: >
-  %\VignetteIndexEntry{aa-ggplot2-themes}
+  %\VignetteIndexEntry{aa-ggplot2-themes} 
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -18,25 +18,30 @@ knitr::opts_chunk$set(
   fig.height = 7,
   fig.align = "center"
 )
-rsconnect <- TRUE
+rsconnect <- FALSE
 # Copy css from inst
 if (FALSE) {
   # devtools::load_all()
-  file.copy(system.file("css/uikit.css", package = "drealthemes"), "uikit.css")
-  file.copy("R/palettes.R", "vignettes/palettes.R", overwrite = TRUE) # Avant rsconnect
-  file.copy("R/ggplot2-functions.R", "vignettes/ggplot2-functions.R", overwrite = TRUE) # Avant rsconnect
+  file.copy("inst/css/uikit.css",
+            "vignettes", overwrite = TRUE)
+  file.copy(list.files("R", pattern = ".R$", full.names = TRUE),
+            "vignettes", overwrite = TRUE)  # Avant rsconnect
 }
 if (rsconnect) {
- source("palettes.R")
- source("ggplot2-functions.R")
+  invisible(lapply(list.files(".", pattern = ".R$", full.names = TRUE),
+         source))
 }
 ```
 
 ## Packages
 ```{r message=FALSE, warning=FALSE}
-library(drealthemes) # Functions are in this package # Uncomment if not rsconnect
+# library(drealthemes) # Functions are in this package # Uncomment if not rsconnect
 library(ggplot2)
 library(dplyr)
+# Just for rsconnect
+library(cowplot)
+library(grid)
+library(gridExtra)
 ```
 
 ## Thème ggplot
@@ -76,7 +81,6 @@ theme_dreal <- function(legend.position = "bottom", ...) {
 ```
 
 ```{r}
-
 # directly in a plot
 ggplot(mtcars) +
   aes(hp, mpg, colour = as.character(gear)) +
@@ -86,7 +90,7 @@ ggplot(mtcars) +
   labs(caption = "Source: DREAL") +
   theme_dreal()
 
-# facte plot
+# facet plot
 ggplot(mtcars) +
   aes(hp, mpg, colour = as.character(gear)) +
   geom_point(size = 4, alpha = .8) +
@@ -97,106 +101,9 @@ ggplot(mtcars) +
   theme_dreal()
 ```
 
-## Theme 2 with annotations
+## Thème avec un format _multiplot_
 
-Création d'un graphique par-dessus le graphique original en utilisant `annotation_custom()` dans le thème.
-
-- Possible mais ne permet pas de créer facilement ce que l'on cherche. 
-- L'annotation est limitée par la zone graphique intérieure par défaut. Si l'on veut que l'annotation s'étende à la totalité du graphique, il faut spécifier les coordonnées manuellement.
-- Cela nécessiterait d'écrire le titre et la _caption_ dans les paramètres de la fonction, séparément. Ceci empêche l'utilisation du thème comme un paramètre global.
-
-```{r, echo=FALSE}
-theme_dreal_annotation <- function(
-  legend.position = "bottom", 
-  my_title = "Mon titre de graphique", 
-  my_caption = "Source: DREAL",
-  dim_area = c(Inf, Inf, -Inf, -Inf), #t,r,b,l
-  ...) {
-  
-  # title plot
-  title <- ggplot() + 
-    labs(title = my_title, caption = my_caption) +
-    theme_minimal() +
-    theme(
-      title = element_text(colour = "white", face = "bold"),
-      
-      plot.background = element_rect(fill = dreal_cols("primary_active")),
-      panel.background = element_rect(fill = NA)
-    )
-  
-  # principal graph
-  list(
-    labs(title = my_title, caption = my_caption),
-    theme_minimal() +
-      theme(
-        title = element_text(face = "bold"),
-        axis.text = element_text(colour = "black",
-                                 margin = margin(t = 1, r = 50),
-                                 hjust = 0),
-        
-        legend.position = legend.position,
-        legend.justification = "left",
-        legend.background = element_rect(
-          fill = dreal_cols("primary_active"), colour = NA),
-        legend.title = element_text(colour = "white", face = "plain"), 
-        legend.text = element_text(colour = "white"),
-        plot.background = element_rect(fill = "white"),
-        panel.background = element_rect(fill = "white"),
-        strip.background = element_rect(fill = dreal_cols("primary")),
-        
-        strip.text = element_text(colour = "white"),
-        
-        panel.grid.minor = element_blank(),
-        panel.grid.major.y = element_line(linetype = "dashed",
-                                          colour = dreal_cols("info_light")),
-        panel.grid.major.x = element_line(colour = dreal_cols("info_light")),
-        ...
-      ),
-    # annotate("rect", xmin = dim_area[4], xmax = dim_area[2],
-    #          ymin = Inf, ymax = dim_area[1],
-    #          fill = dreal_cols("primary_active"))
-    annotation_custom(
-      ggplotGrob(title),
-      xmin = dim_area[4],
-      xmax = dim_area[2],
-      ymin = dim_area[3],
-      ymax = dim_area[1]
-    )
-  )
-}
-
-```
-
-- Dimensions de l'ajout non spécifiées
-```{r}
-ggplot(mtcars, aes(hp, mpg, colour = as.character(gear))) +
-    geom_point(size = 4, alpha = .8) +
-  scale_color_dreal_d() +
-  theme_dreal_annotation(
-    legend.position = "bottom", 
-    my_title = "Dimensions non spécifiées", 
-    my_caption = "Source: DREAL"
-  )
-
-```
-
-- Dimensions spécifiées
-```{r}
-ggplot(mtcars, aes(hp, mpg, colour = as.character(gear))) +
-  geom_point(size = 4, alpha = .8) +
-  scale_color_dreal_d() +
-  theme_dreal_annotation(
-    legend.position = "bottom", 
-    my_title = "Dimensions spécifiées", 
-    my_caption = "",
-    dim_area = c(100, 400, 30, -100) #t,r,b,l
-  )
-```
-
-
-## theme with multiplot
-
-C'est le format le plus proche de la proposition graphique. Cependant, il ne fonctionne pas comme un theme classique. Il nécessite de 'ajouter une fonction à chaque graphique à la place de l'écriture du titre.
+C'est le format le plus proche de la proposition graphique. Cependant, il ne fonctionne pas comme un theme classique. Il nécessite d'ajouter une fonction `drealize` à chaque graphique à la place de l'écriture du titre.
 
 ```{r}
 # directly in a plot
@@ -210,5 +117,33 @@ g2 <- drealize(g,
          legend.position = "bottom")
 
 # ggsave(g2, filename = "g2.png")
+# facet plot
+# facet plot
+g3 <- ggplot(mtcars) +
+  aes(hp, mpg, colour = as.character(gear)) +
+  geom_point(size = 4, alpha = .8) +
+  scale_color_dreal_d() +
+  facet_wrap(vars(carb))
+
+drealize(g3, 
+         title = "Facet plot created with drealize()",
+         caption = "Source: DREAL",
+         legend.position = "bottom")
+
+```
+
+Les graphiques avec légende à droite peuvent nécessiter de définir des tailles de sorties des graphs dans un Rmd pour ajuster les ratios
+
+```{r, fig.width=9, fig.height=4}
+# Plot with legend on the right
+# directly in a plot
+g <- ggplot(mtcars, aes(hp, mpg, colour = as.character(gear))) +
+    geom_point(size = 4, alpha = .8) +
+  scale_color_dreal_d()
+
+drealize(g, 
+         title = "Plot created with drealize()",
+         caption = "Source: DREAL",
+         legend.position = "right")
 ```
 

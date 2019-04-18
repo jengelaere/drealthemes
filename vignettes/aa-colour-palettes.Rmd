@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
   fig.height = 7,
   fig.align = "center"
 )
-rsconnect <- TRUE
+rsconnect <- FALSE
 # Copy css from inst
 if (FALSE) {
   # devtools::load_all()
