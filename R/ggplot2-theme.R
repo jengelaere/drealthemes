@@ -125,3 +125,43 @@ drealize <- function(g, legend.position = "bottom", title = "Title of the graph"
                  widths = widths, heights = heights)
   }
 }
+
+#' ggplot2 theme for Dreal
+#'
+#' This is a complete theme which control all non-data display. Use theme() if you just need to tweak the display of an existing theme
+#'
+#' @param legend.position position of the legend "bottom" or "right"
+#' @param ... Other parameters of \code{\link[ggplot2]{theme}}
+#'
+#' @importFrom ggplot2 theme_minimal theme element_text element_rect element_blank element_line
+#'
+#' @export
+
+theme_dreal <- function(legend.position = "bottom", ...) {
+
+  # legend.position == "bottom"
+  theme_minimal() +
+    theme(
+      title = element_text(colour = "white", face = "bold"),
+      axis.text = element_text(colour = "white", margin = margin(t = 1, r = 50),
+                               hjust = 0),
+
+      legend.position = legend.position,
+      legend.justification = "left",
+      legend.background = element_rect(fill = dreal_cols("primary_active"), colour = NA),
+      legend.title = element_text(colour = "white", face = "plain"),
+      legend.text = element_text(colour = "white"),
+      plot.background = element_rect(fill = dreal_cols("primary_active")),
+      panel.background = element_rect(fill = "white"),
+      strip.background = element_rect(fill = dreal_cols("primary")),
+
+      strip.text = element_text(colour = "white"),
+
+      panel.grid.minor = element_blank(),
+      panel.grid.major.y = element_line(linetype = "dashed",
+                                        colour = dreal_cols("info_light")),
+      panel.grid.major.x = element_line(colour = dreal_cols("info_light")),
+      ...
+    )
+
+}

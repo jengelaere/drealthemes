@@ -8,3 +8,5 @@
 ^data-raw$
 ^rsconnect$
 vignettes/*.R
+^_pkgdown\.yml$
+^docs$

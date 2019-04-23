@@ -18,24 +18,16 @@ knitr::opts_chunk$set(
   fig.height = 7,
   fig.align = "center"
 )
-rsconnect <- FALSE
 # Copy css from inst
 if (FALSE) {
-  # devtools::load_all()
   file.copy("inst/css/uikit.css",
             "vignettes", overwrite = TRUE)
-  file.copy(list.files("R", pattern = ".R$", full.names = TRUE),
-            "vignettes", overwrite = TRUE)  # Avant rsconnect
-}
-if (rsconnect) {
-  invisible(lapply(list.files(".", pattern = ".R$", full.names = TRUE),
-         source))
 }
 ```
 
 ## Packages
 ```{r message=FALSE, warning=FALSE}
-# library(drealthemes) # Functions are in this package # Uncomment if not rsconnect
+library(drealthemes) # Functions are in this package # Uncomment if not rsconnect
 library(ggplot2)
 library(dplyr)
 # Just for rsconnect
@@ -47,38 +39,6 @@ library(gridExtra)
 ## Thème ggplot
 
 Ce thème peut être défini globalement pour un Rmd ou une application Shiny avec `theme_set(theme_dreal())`. Cependant, créer des zones de couleurs différentes pour le titre ou la _caption_ n'est pas possible de cette manière.
-
-```{r echo=FALSE}
-theme_dreal <- function(legend.position = "bottom", ...) {
-
-  # legend.position == "bottom"
-  theme_minimal() +
-    theme(
-      title = element_text(colour = "white", face = "bold"),
-      axis.text = element_text(colour = "white", margin = margin(t = 1, r = 50),
-                               hjust = 0),
-      
-      legend.position = legend.position,
-      legend.justification = "left",
-      legend.background = element_rect(fill = dreal_cols("primary_active"), colour = NA),
-      legend.title = element_text(colour = "white", face = "plain"), 
-      legend.text = element_text(colour = "white"),
-      plot.background = element_rect(fill = dreal_cols("primary_active")),
-      panel.background = element_rect(fill = "white"),
-      strip.background = element_rect(fill = dreal_cols("primary")),
-      
-      strip.text = element_text(colour = "white"),
-      
-      panel.grid.minor = element_blank(),
-      panel.grid.major.y = element_line(linetype = "dashed",
-                                        colour = dreal_cols("info_light")),
-      panel.grid.major.x = element_line(colour = dreal_cols("info_light")),
-      ...
-    )
-  
-}
-
-```
 
 ```{r}
 # directly in a plot

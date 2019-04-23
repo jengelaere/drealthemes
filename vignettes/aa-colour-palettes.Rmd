@@ -18,17 +18,10 @@ knitr::opts_chunk$set(
   fig.height = 7,
   fig.align = "center"
 )
-rsconnect <- FALSE
 # Copy css from inst
 if (FALSE) {
-  # devtools::load_all()
-  file.copy(system.file("css/uikit.css", package = "drealthemes"), "uikit.css")
-  file.copy("R/palettes.R", "vignettes/palettes.R", overwrite = TRUE) # Avant rsconnect
-  file.copy("R/ggplot2-functions.R", "vignettes/ggplot2-functions.R", overwrite = TRUE) # Avant rsconnect
-}
-if (rsconnect) {
- source("palettes.R")
- source("ggplot2-functions.R")
+  file.copy("inst/css/uikit.css",
+            "vignettes", overwrite = TRUE)
 }
 ```
 

@@ -7,16 +7,29 @@
 
 <!-- badges: end -->
 
-The goal of drealthemes is to proporse olor palettes and ggplot2 themes.
+The goal of drealthemes is to propose color palettes and ggplot2 themes.
 
 ## Installation
 
-You can install the released version of drealthemes from archive file
-(Please adapt version number to yours):
+You can clone this repository and then run:
+
+``` r
+remotes::install_deps()
+devtools::install()
+```
+
+Or, you can install the released version of drealthemes from archive
+file if created (Please adapt version number to yours):
 
 ``` r
 # install.packages("remotes")
 remotes::install_local("drealthemes_0.0.0.tar.gz")
+```
+
+## Read the pkgdown site included
+
+``` r
+drealthemes::open_pkgdown()
 ```
 
 ## Example
@@ -71,4 +84,4 @@ g2 <- drealize(g,
          legend.position = "bottom")
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" />
+<img src="man/figures/README-unnamed-chunk-5-1.png" width="100%" />

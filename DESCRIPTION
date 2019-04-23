@@ -26,10 +26,13 @@ Imports:
     gridExtra,
     magrittr,
     stats,
-    tibble
+    tibble,
+    utils
 Suggests: 
+    bookdown,
     dplyr,
     knitr,
+    pkgdown,
     rmarkdown
 VignetteBuilder: 
     knitr

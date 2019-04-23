@@ -17,16 +17,30 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of drealthemes is to proporse olor palettes and ggplot2 themes.
+The goal of drealthemes is to propose color palettes and ggplot2 themes.
 
 ## Installation
 
-You can install the released version of drealthemes from archive file (Please adapt version number to yours):
+You can clone this repository and then run:
+
+```{r, eval=FALSE}
+remotes::install_deps()
+devtools::install()
+```
+
+Or, you can install the released version of drealthemes from archive file if created (Please adapt version number to yours):
 
 ```{r, eval=FALSE}
 # install.packages("remotes")
 remotes::install_local("drealthemes_0.0.0.tar.gz")
 ```
+
+## Read the pkgdown site included
+
+```{r, eval=FALSE}
+drealthemes::open_pkgdown()
+```
+
 
 ## Example
 
