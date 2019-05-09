@@ -109,6 +109,12 @@ attachment::att_to_description()
 attachment::att_to_description(extra.suggests = c("bookdown", "pkgdown"))
 # attachment::create_dependencies_file()
 
+# Knit vignette with pagedown
+temp_dir <- tempdir()
+rmarkdown::render("vignettes/ab-ggplot2-themes.Rmd", output_dir = temp_dir)
+pagedown::chrome_print(input = file.path(temp_dir, "ab-ggplot2-themes.html"))
+browseURL(temp_dir)
+
 # Utils for dev ----
 devtools::install(upgrade = "never")
 # devtools::load_all()
