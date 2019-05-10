@@ -6,12 +6,12 @@ Authors@R:
              family = "Rochette",
              role = c("aut", "cre"),
              email = "sebastien@thinkr.fr",
-             comment = c(ORCID = "0000-0002-1565-9313")),
+             comment = structure("0000-0002-1565-9313", .Names = "ORCID")),
       person(given = "Colin",
              family = "Fay",
              role = "aut",
              email = "colin@thinkr.fr",
-             comment = c(ORCID = "0000-0001-7343-1846")),
+             comment = structure("0000-0001-7343-1846", .Names = "ORCID")),
       person(given = "DREAL",
              role = "cph"))
 Description: Color palettes and ggplot2 themes.
@@ -19,7 +19,9 @@ License: MIT + file LICENSE
 Depends: 
     R (>= 2.10)
 Imports: 
+    attempt,
     cowplot,
+    extrafont,
     ggplot2,
     grDevices,
     grid,

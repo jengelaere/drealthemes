@@ -3,6 +3,8 @@ title: "ggplot2 themes"
 output:
   rmarkdown::html_vignette:
     css: uikit.css
+    includes: 
+      in_header: in_header.html
     toc: yes
 vignette: >
   %\VignetteIndexEntry{aa-ggplot2-themes} 
@@ -22,21 +24,71 @@ knitr::opts_chunk$set(
 if (FALSE) {
   file.copy("inst/css/uikit.css",
             "vignettes", overwrite = TRUE)
+  file.copy("inst/css/in_header.html",
+            "vignettes", overwrite = TRUE)
 }
 ```
 
 ## Packages
 ```{r message=FALSE, warning=FALSE}
-library(drealthemes) # Functions are in this package # Uncomment if not rsconnect
+library(drealthemes)
 library(ggplot2)
 library(dplyr)
 # Just for rsconnect
-library(cowplot)
-library(grid)
-library(gridExtra)
+# library(cowplot)
+# library(grid)
+# library(gridExtra)
 ```
 
-## Thème ggplot
+## Fonts
+
+Les polices doivent être installées sur le système d'exploitation pour fonctionner correctement.
+Les polices nécessaires se trouvent dans le package, vous pouvez ouvrir le dossier de cette façon :  
+```{r, eval = FALSE}
+zip_fonts <- system.file("fonts.zip", package = "drealthemes")
+tmp_dir <- tempdir()
+invisible(unzip(zip_fonts, exdir = tmp_dir))
+browseURL(file.path(tmp_dir, "fonts"))
+```
+
+Installer les polices selon votre système d'exploitation. Suivre [le lien de ce site web pour plus d'informations](https://www.howtogeek.com/192980/how-to-install-remove-and-manage-fonts-on-windows-mac-and-linux/).  
+
+Ensuite, vous devrez utiliser `check_fonts_in_r()` pour vérifier que le package {extrafont} à accès aux polices installées.
+
+Voici une sortie pour vérifier
+```{r}
+g <- ggplot(mtcars) +
+  geom_point(aes(cyl, mpg)) +
+  labs(title = "Mon titre avec Roboto Slab",
+       x = "lab X avec Raleway",
+       y = "Lab Y avec Caveat") +
+  theme(title = element_text(family = "Roboto Slab"),
+        axis.title.x = element_text(family = "Raleway"),
+        axis.title.y = element_text(family = "Caveat")
+  )
+```
+Created :
+```{r, echo=FALSE, out.width="50%"}
+g
+```
+Attendu :
+```{r, echo=FALSE, out.width="50%"}
+# ggsave(g, filename = "g_fonts.png")
+knitr::include_graphics("g_fonts.png")
+```
+
+<!--
+# *On peut supposer que pour un serveur GNU/Linux, il est possible de copier les fonts dans le bon dossier*
+# A condition d'être logué en root pour que tout le monde y ait accès
+# Dossier des polices disponibles
+# system.file("fonts", package = "drealthemes")
+# Dossier où sauver les polices
+# extrafont:::ttf_find_default_path()
+# Il faut parfois ensuite charger les polices (commande dans un terminal)
+# fc-cache
+-->
+
+## Thème ggplot2
 
 Ce thème peut être défini globalement pour un Rmd ou une application Shiny avec `theme_set(theme_dreal())`. Cependant, créer des zones de couleurs différentes pour le titre ou la _caption_ n'est pas possible de cette manière.
 
@@ -76,8 +128,6 @@ g2 <- drealize(g,
          caption = "Source: DREAL",
          legend.position = "bottom")
 
-# ggsave(g2, filename = "g2.png")
-# facet plot
 # facet plot
 g3 <- ggplot(mtcars) +
   aes(hp, mpg, colour = as.character(gear)) +

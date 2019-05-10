@@ -3,13 +3,15 @@ body {
     margin: 0 auto;
 }
 
-code {
+p code {
     background-color: #e3e3e3; /* Added by SEB */
 }
 
-pre, pre code {
+pre {
   background: #292b2c;
   color: white; /* Added by SEB */
+  padding: 5px 10px;
+  /*line-height: 1.5em;*/
 }
 
 html, body {
