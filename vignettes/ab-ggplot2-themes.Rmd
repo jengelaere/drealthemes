@@ -157,3 +157,56 @@ drealize(g,
          legend.position = "right")
 ```
 
+Barplot horizontal avec du texte
+```{r}
+iris %>% 
+  group_by(Species) %>% 
+  summarise(mean_sepalLength = mean(Sepal.Length)) %>% 
+ggplot(aes(x = Species, y =  mean_sepalLength )) +
+  geom_col(fill = dreal_cols("warning_active")) +
+  coord_flip() +
+  theme_dreal() +
+  theme(axis.text.y = element_text(hjust = 0))
+```
+
+Lignes
+```{r}
+ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species)) + 
+  geom_point(aes(shape=Species), size=1.5) +
+  scale_color_dreal_d() +
+  xlab("Sepal Length") +
+  ylab("Sepal Width") +
+  geom_smooth(method = "auto") +
+  theme_dreal()
+```
+
+
+Violin/Boxplot
+
+```{r}
+iris %>% 
+  ggplot(aes(x = Species, y = Sepal.Length)) +
+  geom_boxplot() +
+  theme_dreal()+
+  stat_summary(fun.y=mean, geom="point", size=2, color=dreal_cols("warning_active"), shape = 16)
+
+iris %>% 
+  ggplot(aes(x = Species, y = Sepal.Length)) +
+  geom_violin(color = dreal_cols("secondary_active")) +
+  theme_dreal() +
+  stat_summary(fun.y=median, geom="point", size=2, color=dreal_cols("warning_active"), shape = 16) +
+  stat_summary(fun.y=mean, geom="point", size=2, color=dreal_cols("secondary_active"), shape = 3)
+
+## OU
+
+iris %>% 
+  ggplot(aes(x = Species, y = Sepal.Length)) +
+  geom_violin(color = dreal_cols("secondary_active"), fill =  dreal_cols("secondary_light")) +
+  theme_dreal() +
+  geom_boxplot(width=0.1, color =  dreal_cols("secondary_active")) +
+  stat_summary(fun.y=mean, geom="point", size=2, color=dreal_cols("warning_active"), shape = 16)
+
+```
+
+
+
