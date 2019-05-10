@@ -61,16 +61,32 @@ g <- ggplot(mtcars) +
   geom_point(aes(cyl, mpg)) +
   labs(title = "Mon titre avec Roboto Slab",
        x = "lab X avec Raleway",
-       y = "Lab Y avec Nanum Pen") +
+       y = "Lab Y avec Caveat") +
   theme(title = element_text(family = "Roboto Slab"),
         axis.title.x = element_text(family = "Raleway"),
-        axis.title.y = element_text(family = "Nanum Pen")
+        axis.title.y = element_text(family = "Caveat")
   )
 ```
-```{r, echo=FALSE, out.width="75%"}
+Created :
+```{r, echo=FALSE, out.width="50%"}
+g
+```
+Attendu :
+```{r, echo=FALSE, out.width="50%"}
 # ggsave(g, filename = "g_fonts.png")
 knitr::include_graphics("g_fonts.png")
 ```
+
+<!--
+# *On peut supposer que pour un serveur GNU/Linux, il est possible de copier les fonts dans le bon dossier*
+# A condition d'être logué en root pour que tout le monde y ait accès
+# Dossier des polices disponibles
+# system.file("fonts", package = "drealthemes")
+# Dossier où sauver les polices
+# extrafont:::ttf_find_default_path()
+# Il faut parfois ensuite charger les polices (commande dans un terminal)
+# fc-cache
+-->
 
 ## Thème ggplot2
 

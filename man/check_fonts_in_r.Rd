@@ -4,7 +4,7 @@
 \alias{check_fonts_in_r}
 \title{Tests if fonts are available on the system and import for extrafont}
 \usage{
-check_fonts_in_r(fonts = c("Raleway", "Roboto Slab", "Nanum Pen"),
+check_fonts_in_r(fonts = c("Raleway", "Roboto Slab", "Caveat"),
   import = TRUE, verbose = TRUE, browse = FALSE)
 }
 \arguments{
@@ -26,4 +26,17 @@ For fonts to be used, they need to be installed on the machine.
 # Change browse to TRUE to open folder with fonts required
 check_fonts_in_r(import = FALSE)
 
+# Test if working
+\dontrun{
+library(ggplot2)
+ggplot(mtcars) +
+  geom_point(aes(cyl, mpg)) +
+  labs(title = "Mon titre avec Roboto Slab",
+       x = "lab X avec Raleway",
+       y = "Lab Y avec Caveat") +
+  theme(title = element_text(family = "Roboto Slab"),
+        axis.title.x = element_text(family = "Raleway"),
+        axis.title.y = element_text(family = "Caveat")
+  )
+}
 }

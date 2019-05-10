@@ -1,7 +1,18 @@
-#' Load fonts
-load_fonts <- function() {
+#' Function to run onLoad
+
+onload_function <- function() {
+  # load fonts
+  load_fonts()
   # test for fonts
   check_fonts_in_r(import = FALSE, browse = FALSE)
+}
+
+#' Load installed fonts
+#' @export
+#' @examples
+#' load_fonts()
+
+load_fonts <- function() {
   # load fonts
   # Run it once in every R session
   pdfFonts <- grDevices::pdfFonts
@@ -9,6 +20,7 @@ load_fonts <- function() {
   extrafont::loadfonts(quiet = TRUE)
   # On windows only
   if (.Platform$OS.type == "windows") {
+    windowsFonts <- grDevices::windowsFonts
     extrafont::loadfonts(device = "win")
   }
 }
@@ -30,7 +42,21 @@ load_fonts <- function() {
 #' # Change browse to TRUE to open folder with fonts required
 #' check_fonts_in_r(import = FALSE)
 #'
-check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Nanum Pen"),
+#' # Test if working
+#' \dontrun{
+#' library(ggplot2)
+#' ggplot(mtcars) +
+#'   geom_point(aes(cyl, mpg)) +
+#'   labs(title = "Mon titre avec Roboto Slab",
+#'        x = "lab X avec Raleway",
+#'        y = "Lab Y avec Caveat") +
+#'   theme(title = element_text(family = "Roboto Slab"),
+#'         axis.title.x = element_text(family = "Raleway"),
+#'         axis.title.y = element_text(family = "Caveat")
+#'   )
+#' }
+
+check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Caveat"),
                              import = TRUE,
                              verbose = TRUE, browse = FALSE) {
 
@@ -44,6 +70,9 @@ check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Nanum Pen"),
       res
     }) %>% unlist()
     names(res) <- fonts
+
+    # load installed fonts
+    load_fonts()
   }
 
   res <- lapply(fonts, function(x) {(extrafont::choose_font(x) != "")}) %>%
@@ -52,11 +81,12 @@ check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Nanum Pen"),
 
   # If some are missing
   if (sum(!res) != 0 & isTRUE(verbose)) {
-    warning("You need to install the following fonts on your computer: ",
+    warning("To use the complete theme, you need to install the following fonts on your computer: ",
             paste(names(res)[!res], collapse = ", "), ".",
-            "\nRun : check_fonts_in_r(browse = TRUE) to find fonts.",
-            "\n And run again check_fonts_in_r() after installation.",
-            "\n See for instance: https://www.howtogeek.com/192980/how-to-install-remove-and-manage-fonts-on-windows-mac-and-linux/")
+            "\n1 - Run : check_fonts_in_r(browse = TRUE) to find fonts.",
+            "\n  To install, see for instance: https://www.howtogeek.com/192980/how-to-install-remove-and-manage-fonts-on-windows-mac-and-linux/",
+            "\n2 - Run check_fonts_in_r(install = TRUE) after fonts installation."
+    )
     if (isTRUE(browse)) {
       zip_fonts <- system.file("fonts.zip", package = "drealthemes")
       tmp_dir <- tempdir()
@@ -67,14 +97,7 @@ check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Nanum Pen"),
   res
 }
 
-# *On peut supposer que pour un serveur GNU/Linux, il est possible de copier les fonts dans le bon dossier*
-# A condition d'être logué en root pour que tout le monde y ait accès
-# Dossier des polices disponibles
-# system.file("fonts", package = "drealthemes")
-# Dossier où sauver les polices
-# extrafont:::ttf_find_default_path()
-# Il faut parfois ensuite charger les polices (commande dans un terminal)
-# fc-cache
+
 
 # icones
 # if (extrafont::choose_font("dreal") == "") {
@@ -95,7 +118,7 @@ check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Nanum Pen"),
 #   extrafont::ttf_import(dir_fonts)
 #   extrafont::font_import(dir_fonts)
 # }
-# (extrafont::choose_font("Nanum Pen") == "")
+# (extrafont::choose_font("Caveat") == "")
 # extrafont::fonts()
 # ttf_import()
 
@@ -109,16 +132,6 @@ check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Nanum Pen"),
 # }
 # To output a pdf, you have to embed fonts
 # embed_fonts("plot_cm.pdf", outfile = "plot_cm_embed.pdf")
-
-#
-# g <- ggplot(mtcars) +
-#   geom_point(aes(cyl, mpg)) +
-#   labs(title = "Mon titre avec font") +
-#   # theme(title = element_text(family = "Raleway"))
-#   # theme(title = element_text(family = "Nanum Pen"))
-#   theme(title = element_text(family = "Roboto Slab"))
-# g
-
 
 ## showtext
 # library(showtext)
@@ -147,7 +160,7 @@ check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Nanum Pen"),
 #   geom_point(aes(cyl, mpg)) +
 #   labs(title = "Mon titre avec font") +
 #   # theme(title = element_text(family = "Raleway", face = "bold"))
-#   # theme(title = element_text(family = "Nanum Pen"))
+#   # theme(title = element_text(family = "Caveat"))
 #   theme(title = element_text(family = "Roboto Slab"))
 # g
 # print(g)

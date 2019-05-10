@@ -8,5 +8,5 @@
   packageStartupMessage("*******************************************************\n")
 }
 .onLoad <- function(libname, pkgname) {
-  load_fonts()
+  onload_function()
 }

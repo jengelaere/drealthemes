@@ -2,10 +2,13 @@
 % Please edit documentation in R/load_fonts.R
 \name{load_fonts}
 \alias{load_fonts}
-\title{Load fonts}
+\title{Load installed fonts}
 \usage{
 load_fonts()
 }
 \description{
-Load fonts
+Load installed fonts
+}
+\examples{
+load_fonts()
 }
