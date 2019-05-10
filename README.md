@@ -36,6 +36,18 @@ drealthemes::open_pkgdown()
 
 ``` r
 library(drealthemes)
+#> Registered S3 methods overwritten by 'ggplot2':
+#>   method         from 
+#>   [.quosures     rlang
+#>   c.quosures     rlang
+#>   print.quosures rlang
+#> 
+#> 
+#> *******************************************************
+#> theme_dreal() for ggplot2 is not set as default,
+#> to do so, execute:
+#>   theme_set(theme_dreal())
+#> *******************************************************
 library(dplyr)
 #> 
 #> Attaching package: 'dplyr'

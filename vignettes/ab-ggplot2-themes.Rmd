@@ -16,9 +16,10 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = FALSE,
   comment = "#>",
-  fig.width = 7,
-  fig.height = 7,
-  fig.align = "center"
+  fig.width = 9,
+  fig.height = 9,
+  fig.align = "center",
+  out.width = "75%"
 )
 # Copy css from inst
 if (FALSE) {
@@ -67,13 +68,13 @@ g <- ggplot(mtcars) +
         axis.title.y = element_text(family = "Caveat")
   )
 ```
-Created :
+Créé :
 ```{r, echo=FALSE, out.width="50%"}
 g
 ```
 Attendu :
 ```{r, echo=FALSE, out.width="50%"}
-# ggsave(g, filename = "g_fonts.png")
+# ggsave(g, filename = "vignettes/g_fonts.png", width = 10, height = 10)
 knitr::include_graphics("g_fonts.png")
 ```
 
@@ -98,9 +99,11 @@ ggplot(mtcars) +
   aes(hp, mpg, colour = as.character(gear)) +
   geom_point(size = 4, alpha = .8) +
   scale_color_dreal_d() +
-  ggtitle("Simple graph") +
-  labs(caption = "Source: DREAL") +
-  theme_dreal()
+  ggtitle("Distance parcourue selon la puissance") +
+  labs(caption = "Source: DREAL",
+       colour = "Nombre de vitesses :",
+       x = "Puissance", y = "Nombre de miles par galon") +
+  theme_dreal_dark()
 
 # facet plot
 ggplot(mtcars) +
@@ -108,12 +111,99 @@ ggplot(mtcars) +
   geom_point(size = 4, alpha = .8) +
   scale_color_dreal_d() +
   facet_wrap(vars(carb)) +
-  ggtitle("Facets graph") +
-  labs(caption = "Source: DREAL") +
+  labs(
+    title = "Distance parcourue selon la puissance",
+    caption = "Source: DREAL",
+       colour = "Nombre de vitesses :",
+       x = "Puissance", y = "Nombre de miles par galon") +
+  theme_dreal_light(caption.position = "right")
+```
+
+## Autres graphiques
+
+Barplot horizontal avec du texte
+```{r}
+
+
+iris %>% 
+  group_by(Species) %>% 
+  summarise(mean_sepalLength = mean(Sepal.Length)) %>% 
+ggplot(aes(x = Species, y =  mean_sepalLength )) +
+  geom_col(fill = dreal_cols("warning_active")) +
+  coord_flip() +
   theme_dreal()
 ```
 
-## Thème avec un format _multiplot_
+Lignes
+```{r}
+ggplot(data = iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species)) + 
+  geom_point(aes(shape=Species), size=1.5) +
+  scale_color_dreal_d() +
+  xlab("Sepal Length") +
+  ylab("Sepal Width") +
+  geom_smooth(method = "auto") +
+  theme_dreal()
+```
+
+
+Violin/Boxplot
+
+```{r}
+iris %>% 
+  ggplot(aes(x = Species, y = Sepal.Length)) +
+  geom_boxplot() +
+  theme_dreal()+
+  stat_summary(fun.y = mean, geom="point", size=2, color=dreal_cols("warning_active"), shape = 16)
+
+iris %>%
+  ggplot(aes(x = Species, y = Sepal.Length)) +
+  geom_violin(color = dreal_cols("secondary_active")) +
+  theme_dreal() +
+  stat_summary(fun.y = median, geom = "point",
+               size = 2, color = dreal_cols("warning_active"),
+               shape = 16) +
+  stat_summary(fun.y = mean, geom = "point",
+               size = 2, color = dreal_cols("secondary_active"),
+               shape = 3)
+## OU
+
+iris %>%
+  ggplot(aes(x = Species, y = Sepal.Length)) +
+  geom_violin(color = dreal_cols("secondary_active"), fill = dreal_cols("secondary_light")) +
+  theme_dreal() +
+  geom_boxplot(width = 0.1, color = dreal_cols("secondary_active")) +
+  stat_summary(fun.y = mean, geom = "point",
+               size = 2, color = dreal_cols("warning_active"),
+               shape = 16)
+
+```
+
+### Fixer les couleurs par défault
+Il est possible de définir des couleurs par défaut pour les différents types de graphiques avec `dreal_geom_defaults()`.
+
+```{r}
+# Original
+iris %>% 
+  ggplot(aes(x = Species, y = Sepal.Length)) +
+  geom_violin()
+
+# Set dreal defaults
+dreal_geom_defaults()
+iris %>% 
+  ggplot(aes(x = Species, y = Sepal.Length)) +
+  geom_violin()
+
+# Restore ggplot2 defaults
+dreal_geom_defaults("ggplot2")
+iris %>% 
+  ggplot(aes(x = Species, y = Sepal.Length)) +
+  geom_violin()
+```
+
+
+
+
+## Thème avec `drealize` pour un format de type _multiplot_
 
 C'est le format le plus proche de la proposition graphique. Cependant, il ne fonctionne pas comme un theme classique. Il nécessite d'ajouter une fonction `drealize` à chaque graphique à la place de l'écriture du titre.
 
@@ -156,57 +246,3 @@ drealize(g,
          caption = "Source: DREAL",
          legend.position = "right")
 ```
-
-Barplot horizontal avec du texte
-```{r}
-iris %>% 
-  group_by(Species) %>% 
-  summarise(mean_sepalLength = mean(Sepal.Length)) %>% 
-ggplot(aes(x = Species, y =  mean_sepalLength )) +
-  geom_col(fill = dreal_cols("warning_active")) +
-  coord_flip() +
-  theme_dreal() +
-  theme(axis.text.y = element_text(hjust = 0))
-```
-
-Lignes
-```{r}
-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species)) + 
-  geom_point(aes(shape=Species), size=1.5) +
-  scale_color_dreal_d() +
-  xlab("Sepal Length") +
-  ylab("Sepal Width") +
-  geom_smooth(method = "auto") +
-  theme_dreal()
-```
-
-
-Violin/Boxplot
-
-```{r}
-iris %>% 
-  ggplot(aes(x = Species, y = Sepal.Length)) +
-  geom_boxplot() +
-  theme_dreal()+
-  stat_summary(fun.y=mean, geom="point", size=2, color=dreal_cols("warning_active"), shape = 16)
-
-iris %>% 
-  ggplot(aes(x = Species, y = Sepal.Length)) +
-  geom_violin(color = dreal_cols("secondary_active")) +
-  theme_dreal() +
-  stat_summary(fun.y=median, geom="point", size=2, color=dreal_cols("warning_active"), shape = 16) +
-  stat_summary(fun.y=mean, geom="point", size=2, color=dreal_cols("secondary_active"), shape = 3)
-
-## OU
-
-iris %>% 
-  ggplot(aes(x = Species, y = Sepal.Length)) +
-  geom_violin(color = dreal_cols("secondary_active"), fill =  dreal_cols("secondary_light")) +
-  theme_dreal() +
-  geom_boxplot(width=0.1, color =  dreal_cols("secondary_active")) +
-  stat_summary(fun.y=mean, geom="point", size=2, color=dreal_cols("warning_active"), shape = 16)
-
-```
-
-
-
