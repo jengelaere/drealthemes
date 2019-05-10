@@ -8,8 +8,8 @@ test:
   script:
   - mkdir -p $R_LIBS_USER $BUILD_LOGS_DIR
   - R -e 'remotes::install_deps(dependencies=NA, upgrade="never", lib = "'$R_LIBS_USER'")'
-  - R -e '.libPaths() <- c(.libPaths(), "'$R_LIBS_USER'"); devtools::check(check_dir = "'$CHECK_DIR'")'
-  - R -e '.libPaths() <- c(.libPaths(), "'$R_LIBS_USER'"); if (length(devtools::check_failures(path = "'$BUILD_LOGS_DIR'", note = FALSE)) > 0) stop()'
+  - R -e '.libPaths(c(.libPaths(), "'$R_LIBS_USER'")); devtools::check(check_dir = "'$CHECK_DIR'")'
+  - R -e '.libPaths(c(.libPaths(), "'$R_LIBS_USER'")); if (length(devtools::check_failures(path = "'$BUILD_LOGS_DIR'", note = FALSE)) > 0) stop()'
   cache:
     paths:
     - $R_LIBS_USER
