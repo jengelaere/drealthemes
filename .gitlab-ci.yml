@@ -2,6 +2,6 @@ image: thinkr/runnerci
 test:
   script:
   - R -e 'install.packages(c("devtools", "remotes"))'
-  - R -e 'remotes::install_deps(dependencies=NA, upgrade="never")'
+  - R -e 'remotes::install_deps(dependencies=TRUE, upgrade="never")'
   - R -e 'devtools::check()'
 
