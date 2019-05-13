@@ -31,6 +31,7 @@ ggempty <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1), ...)
 #' Default to c(1, 9, 0.5) for legend.position = "left".
 #' @param widths widths of the two columns of plot with legend.position = "left".
 #' Default to c(4, 1).
+#' @param text.size main text size in pts.
 #' @param ... other parameters of \code{ggplot2::\link[ggplot2]{theme}}
 #'
 #' @importFrom ggplot2 theme_minimal theme margin
@@ -54,7 +55,7 @@ ggempty <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1), ...)
 #'
 #' @export
 drealize <- function(g, legend.position = "bottom", title = "Title of the graph", caption = "Source : DREAL",
-                     heights, widths,
+                     heights, widths, text.size = 12,
                      ...) {
 
   if (!legend.position %in% c("bottom", "right")) {
@@ -77,7 +78,8 @@ drealize <- function(g, legend.position = "bottom", title = "Title of the graph"
     theme_minimal() +
       theme(
         # title = element_text(colour = "white", face = "bold"),
-        axis.text = element_text(colour = "black", margin = margin(t = 1, r = 50),
+        axis.text = element_text(colour = "black", size = text.size,
+                                 margin = margin(t = 1, r = 50),
                                  hjust = 0),
         legend.position = "none",
         plot.background = element_rect(fill = "white"),
@@ -132,6 +134,8 @@ drealize <- function(g, legend.position = "bottom", title = "Title of the graph"
 #'
 #' @param legend.position position of the legend "bottom" or "right"
 #' @param caption.position position of the caption "left" or "right"
+#' @param flipped Logical. Whether \code{\link[ggplot2]{coord_flip}} has been added to the plot
+#' @param text.size main text size in pts.
 #' @param ... Other parameters of \code{\link[ggplot2]{theme}}
 #'
 #' @importFrom ggplot2 theme_minimal theme element_text element_rect element_blank element_line
@@ -141,6 +145,8 @@ drealize <- function(g, legend.position = "bottom", title = "Title of the graph"
 
 theme_dreal_dark <- function(legend.position = c("bottom", "right"),
                              caption.position = c("left", "right"),
+                             flipped = FALSE,
+                             text.size = 13,
                              ...) {
 
   legend.position <- match.arg(legend.position, c("bottom", "right"), several.ok = FALSE)
@@ -150,10 +156,16 @@ theme_dreal_dark <- function(legend.position = c("bottom", "right"),
   } else {
     cap.hjust <- 1
   }
+  if (isTRUE(flipped)) {
+    panel.grid.major.y <- element_blank()
+  } else {
+    panel.grid.major.y <- element_line(linetype = "dashed",
+                                       colour = dreal_cols("info_light"))
+  }
 
   theme_minimal() +
     theme(
-      text = element_text(family = "Raleway"),
+      text = element_text(family = "Raleway", size = text.size),
       plot.title = element_text(margin = margin(t = 10, b = 15)),
 
       legend.position = legend.position,
@@ -161,8 +173,8 @@ theme_dreal_dark <- function(legend.position = c("bottom", "right"),
 
       legend.background = element_rect(fill = dreal_cols("primary_active"), colour = NA),
       plot.background = element_rect(fill = dreal_cols("primary_active")),
-      panel.background = element_rect(fill = "white"),
-      strip.background = element_rect(fill = dreal_cols("primary")),
+      panel.background = element_rect(fill = "white", colour = NA),
+      strip.background = element_rect(fill = dreal_cols("primary"), colour = NA),
 
       title = element_text(colour = "white", face = "bold"),
       plot.caption = element_text(hjust = cap.hjust, colour = dreal_cols("info_light")),
@@ -172,9 +184,10 @@ theme_dreal_dark <- function(legend.position = c("bottom", "right"),
       strip.text = element_text(colour = "white"),
 
       panel.grid.minor = element_blank(),
-      panel.grid.major.y = element_line(linetype = "dashed",
-                                        colour = dreal_cols("info_light")),
+      panel.grid.major.y = panel.grid.major.y,
       panel.grid.major.x = element_line(colour = dreal_cols("info_light")),
+      axis.ticks.y.left = element_line(colour = dreal_cols("info")),
+      axis.line.y.left = element_line(colour = dreal_cols("info")),
       ...
     )
 
@@ -185,6 +198,8 @@ theme_dreal_dark <- function(legend.position = c("bottom", "right"),
 #' @export
 theme_dreal_light <- function(legend.position = c("bottom", "right"),
                               caption.position = c("left", "right"),
+                              flipped = FALSE,
+                              text.size = 13,
                               ...) {
 
   legend.position <- match.arg(legend.position, c("bottom", "right"), several.ok = FALSE)
@@ -194,10 +209,16 @@ theme_dreal_light <- function(legend.position = c("bottom", "right"),
   } else {
     cap.hjust <- 1
   }
+  if (isTRUE(flipped)) {
+    panel.grid.major.y <- element_blank()
+  } else {
+    panel.grid.major.y <- element_line(linetype = "dashed",
+                                       colour = dreal_cols("info_light"))
+  }
 
   theme_minimal() +
     theme(
-      text = element_text(family = "Raleway"),
+      text = element_text(family = "Raleway", size = text.size),
       plot.title = element_text(margin = margin(t = 10, b = 15)),
 
       legend.position = legend.position,
@@ -205,8 +226,8 @@ theme_dreal_light <- function(legend.position = c("bottom", "right"),
 
       legend.background = element_rect(fill = "white", colour = NA),
       plot.background = element_rect(fill = "white"),
-      panel.background = element_rect(fill = "white"),
-      strip.background = element_rect(fill = dreal_cols("primary")),
+      panel.background = element_rect(fill = "white", colour = NA),
+      strip.background = element_rect(fill = dreal_cols("primary"), colour = NA),
 
       title = element_text(colour = dreal_cols("primary_active"), face = "bold"),
       plot.caption = element_text(hjust = cap.hjust, colour = dreal_cols("info_active")),
@@ -216,9 +237,10 @@ theme_dreal_light <- function(legend.position = c("bottom", "right"),
       strip.text = element_text(colour = "white"),
 
       panel.grid.minor = element_blank(),
-      panel.grid.major.y = element_line(linetype = "dashed",
-                                        colour = dreal_cols("info_light")),
+      panel.grid.major.y = panel.grid.major.y,
       panel.grid.major.x = element_line(colour = dreal_cols("info_light")),
+      axis.ticks.y.left = element_line(colour = dreal_cols("info_light")),
+      axis.line.y.left = element_line(colour = dreal_cols("info")),
       ...
     )
 
@@ -232,13 +254,14 @@ theme_dreal_light <- function(legend.position = c("bottom", "right"),
 theme_dreal <- function(type = c("light", "dark"),
                         legend.position = c("bottom", "right"),
                         caption.position = c("left", "right"),
+                        flipped = FALSE, text.size = 13,
                         ...) {
 
   type <- match.arg(type, c("light", "dark"), several.ok = FALSE)
   if (type == "light") {
-    theme_dreal_light(legend.position, caption.position, ...)
+    theme_dreal_light(legend.position, caption.position, flipped, text.size, ...)
   } else if (type == "dark") {
-    theme_dreal_dark(legend.position, caption.position, ...)
+    theme_dreal_dark(legend.position, caption.position, flipped, text.size, ...)
   }
 }
 

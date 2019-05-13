@@ -6,12 +6,12 @@ Authors@R:
              family = "Rochette",
              role = c("aut", "cre"),
              email = "sebastien@thinkr.fr",
-             comment = structure("0000-0002-1565-9313", .Names = "ORCID")),
+             comment = c(ORCID = "0000-0002-1565-9313")),
       person(given = "Colin",
              family = "Fay",
              role = "aut",
              email = "colin@thinkr.fr",
-             comment = structure("0000-0001-7343-1846", .Names = "ORCID")),
+             comment = c(ORCID = "0000-0001-7343-1846")),
       person(given = "DREAL",
              role = "cph"))
 Description: Color palettes and ggplot2 themes.

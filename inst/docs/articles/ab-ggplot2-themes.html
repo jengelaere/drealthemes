@@ -113,79 +113,234 @@
 <div id="packages" class="section level2">
 <h2 class="hasAnchor">
 <a href="#packages" class="anchor"></a>Packages</h2>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(drealthemes) <span class="co"># Functions are in this package # Uncomment if not rsconnect</span></a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(drealthemes)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
 <a class="sourceLine" id="cb1-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a>
 <a class="sourceLine" id="cb1-4" title="4"><span class="co"># Just for rsconnect</span></a>
-<a class="sourceLine" id="cb1-5" title="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(cowplot)</a>
-<a class="sourceLine" id="cb1-6" title="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(grid)</a>
-<a class="sourceLine" id="cb1-7" title="7"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(gridExtra)</a></code></pre></div>
+<a class="sourceLine" id="cb1-5" title="5"><span class="co"># library(cowplot)</span></a>
+<a class="sourceLine" id="cb1-6" title="6"><span class="co"># library(grid)</span></a>
+<a class="sourceLine" id="cb1-7" title="7"><span class="co"># library(gridExtra)</span></a></code></pre></div>
 </div>
-<div id="theme-ggplot" class="section level2">
+<div id="fonts" class="section level2">
 <h2 class="hasAnchor">
-<a href="#theme-ggplot" class="anchor"></a>Thème ggplot</h2>
+<a href="#fonts" class="anchor"></a>Fonts</h2>
+<p>Les polices doivent être installées sur le système d’exploitation pour fonctionner correctement. Les polices nécessaires se trouvent dans le package, vous pouvez ouvrir le dossier de cette façon :</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">zip_fonts &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/system.file">system.file</a></span>(<span class="st">"fonts.zip"</span>, <span class="dt">package =</span> <span class="st">"drealthemes"</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2">tmp_dir &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/tempfile">tempdir</a></span>()</a>
+<a class="sourceLine" id="cb2-3" title="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/invisible">invisible</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/unzip">unzip</a></span>(zip_fonts, <span class="dt">exdir =</span> tmp_dir))</a>
+<a class="sourceLine" id="cb2-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/browseURL">browseURL</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/file.path">file.path</a></span>(tmp_dir, <span class="st">"fonts"</span>))</a></code></pre></div>
+<p>Installer les polices selon votre système d’exploitation. Suivre <a href="https://www.howtogeek.com/192980/how-to-install-remove-and-manage-fonts-on-windows-mac-and-linux/">le lien de ce site web pour plus d’informations</a>.</p>
+<p>Ensuite, vous devrez utiliser <code><a href="../reference/check_fonts_in_r.html">check_fonts_in_r()</a></code> pour vérifier que le package {extrafont} à accès aux polices installées.</p>
+<p>Voici une sortie pour vérifier</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">g &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(cyl, mpg)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">title =</span> <span class="st">"Mon titre avec Roboto Slab"</span>,</a>
+<a class="sourceLine" id="cb3-4" title="4">       <span class="dt">x =</span> <span class="st">"lab X avec Raleway"</span>,</a>
+<a class="sourceLine" id="cb3-5" title="5">       <span class="dt">y =</span> <span class="st">"Lab Y avec Caveat"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb3-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme">theme</a></span>(<span class="dt">title =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">family =</span> <span class="st">"Roboto Slab"</span>),</a>
+<a class="sourceLine" id="cb3-7" title="7">        <span class="dt">axis.title.x =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">family =</span> <span class="st">"Raleway"</span>),</a>
+<a class="sourceLine" id="cb3-8" title="8">        <span class="dt">axis.title.y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/element">element_text</a></span>(<span class="dt">family =</span> <span class="st">"Caveat"</span>)</a>
+<a class="sourceLine" id="cb3-9" title="9">  )</a></code></pre></div>
+<p>Créé : <img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-4-1.png" width="50%" style="display: block; margin: auto;"> Attendu : <img src="g_fonts.png" width="50%" style="display: block; margin: auto;"></p>
+<!--
+# *On peut supposer que pour un serveur GNU/Linux, il est possible de copier les fonts dans le bon dossier*
+# A condition d'être logué en root pour que tout le monde y ait accès
+# Dossier des polices disponibles
+# system.file("fonts", package = "drealthemes")
+# Dossier où sauver les polices
+# extrafont:::ttf_find_default_path()
+# Il faut parfois ensuite charger les polices (commande dans un terminal)
+# fc-cache
+-->
+</div>
+<div id="theme-ggplot2" class="section level2">
+<h2 class="hasAnchor">
+<a href="#theme-ggplot2" class="anchor"></a>Thème ggplot2</h2>
 <p>Ce thème peut être défini globalement pour un Rmd ou une application Shiny avec <code><a href="https://www.rdocumentation.org/packages/ggplot2/topics/theme_get">theme_set(theme_dreal())</a></code>. Cependant, créer des zones de couleurs différentes pour le titre ou la <em>caption</em> n’est pas possible de cette manière.</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="co"># directly in a plot</span></a>
-<a class="sourceLine" id="cb2-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-4" title="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Simple graph"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-7" title="7"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb2-8" title="8"><span class="st">  </span><span class="kw"><a href="../reference/theme_dreal.html">theme_dreal</a></span>()</a></code></pre></div>
-<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-2-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># facet plot</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/vars">vars</a></span>(carb)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-7" title="7"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Facets graph"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-8" title="8"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb3-9" title="9"><span class="st">  </span><span class="kw"><a href="../reference/theme_dreal.html">theme_dreal</a></span>()</a></code></pre></div>
-<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-2-2.png" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Distance parcourue selon la puissance"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
+<a class="sourceLine" id="cb4-7" title="7">       <span class="dt">colour =</span> <span class="st">"Nombre de vitesses :"</span>,</a>
+<a class="sourceLine" id="cb4-8" title="8">       <span class="dt">x =</span> <span class="st">"Puissance"</span>, <span class="dt">y =</span> <span class="st">"Nombre de miles par galon"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-9" title="9"><span class="st">  </span><span class="kw"><a href="../reference/theme_dreal.html">theme_dreal_light</a></span>()</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-6-1.png" width="75%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># facet plot</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/vars">vars</a></span>(carb)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-7" title="7"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(</a>
+<a class="sourceLine" id="cb5-8" title="8">    <span class="dt">title =</span> <span class="st">"Distance parcourue selon la puissance"</span>,</a>
+<a class="sourceLine" id="cb5-9" title="9">    <span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
+<a class="sourceLine" id="cb5-10" title="10">       <span class="dt">colour =</span> <span class="st">"Nombre de vitesses :"</span>,</a>
+<a class="sourceLine" id="cb5-11" title="11">       <span class="dt">x =</span> <span class="st">"Puissance"</span>, <span class="dt">y =</span> <span class="st">"Nombre de miles par galon"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-12" title="12"><span class="st">  </span><span class="kw"><a href="../reference/theme_dreal.html">theme_dreal_light</a></span>(<span class="dt">caption.position =</span> <span class="st">"right"</span>)</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-6-2.png" width="75%" style="display: block; margin: auto;"></p>
 </div>
-<div id="theme-avec-un-format-multiplot" class="section level2">
+<div id="autres-graphiques" class="section level2">
 <h2 class="hasAnchor">
-<a href="#theme-avec-un-format-multiplot" class="anchor"></a>Thème avec un format <em>multiplot</em>
+<a href="#autres-graphiques" class="anchor"></a>Autres graphiques</h2>
+<p>Barplot horizontal avec du texte</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(Species) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">mean_sepalLength =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/mean">mean</a></span>(Sepal.Length)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb6-4" title="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> Species, <span class="dt">y =</span>  mean_sepalLength )) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_col</a></span>(<span class="dt">fill =</span> <span class="kw"><a href="../reference/dreal_cols.html">dreal_cols</a></span>(<span class="st">"secondary_light"</span>), <span class="dt">width =</span> <span class="fl">0.6</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/coord_flip">coord_flip</a></span>(<span class="dt">xlim =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="fl">0.33</span>, <span class="fl">3.66</span>), <span class="dt">expand =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-7" title="7"><span class="st">  </span><span class="kw"><a href="../reference/theme_dreal.html">theme_dreal_dark</a></span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-7-1.png" width="75%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Fill by discrete variable using default palette</span></a>
+<a class="sourceLine" id="cb7-2" title="2">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(gear, <span class="dt">carb =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(carb)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">n =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_col</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(gear), n, <span class="dt">fill =</span> carb),</a>
+<a class="sourceLine" id="cb7-7" title="7">           <span class="dt">position =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/position_stack">position_fill</a></span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb7-8" title="8">           <span class="dt">width =</span> <span class="fl">0.66</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-9" title="9"><span class="st">  </span><span class="co"># dreal</span></a>
+<a class="sourceLine" id="cb7-10" title="10"><span class="st">  </span><span class="kw"><a href="../reference/scale_fill_dreal_d.html">scale_fill_dreal_d</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="st">  </span><span class="kw"><a href="../reference/theme_dreal.html">theme_dreal</a></span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-12" title="12"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/coord_flip">coord_flip</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="st">  </span><span class="co"># additionnal tweaks</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous">scale_y_continuous</a></span>(<span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/expand_scale">expand_scale</a></span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-15" title="15"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">title =</span> <span class="st">"Véhicules selon nombre de carburateurs et de vitesses"</span>,</a>
+<a class="sourceLine" id="cb7-16" title="16">       <span class="dt">x =</span> <span class="st">"Vitesses"</span>, <span class="dt">y =</span> <span class="ot">NULL</span>, <span class="dt">fill =</span> <span class="st">"Carburateurs"</span>,</a>
+<a class="sourceLine" id="cb7-17" title="17">       <span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-18" title="18"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/guides">guides</a></span>(<span class="dt">fill =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/guide_legend">guide_legend</a></span>(<span class="dt">ncol =</span> <span class="dv">6</span>))</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-7-2.png" width="75%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># Fill by discrete variable using default palette</span></a>
+<a class="sourceLine" id="cb8-2" title="2">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(gear, <span class="dt">carb =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(carb)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-4" title="4"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">n =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb8-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_col</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(gear), n, <span class="dt">fill =</span> carb),</a>
+<a class="sourceLine" id="cb8-7" title="7">           <span class="dt">position =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/position_dodge">position_dodge2</a></span>(),</a>
+<a class="sourceLine" id="cb8-8" title="8">           <span class="dt">width =</span> <span class="fl">0.75</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-9" title="9"><span class="st">  </span><span class="co"># dreal</span></a>
+<a class="sourceLine" id="cb8-10" title="10"><span class="st">  </span><span class="kw"><a href="../reference/scale_fill_dreal_d.html">scale_fill_dreal_d</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-11" title="11"><span class="st">  </span><span class="kw"><a href="../reference/theme_dreal.html">theme_dreal_dark</a></span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-12" title="12"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/coord_flip">coord_flip</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-13" title="13"><span class="st">  </span><span class="co"># additionnal tweaks</span></a>
+<a class="sourceLine" id="cb8-14" title="14"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous">scale_y_continuous</a></span>(<span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/expand_scale">expand_scale</a></span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-15" title="15"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">title =</span> <span class="st">"Véhicules selon nombre de carburateurs et de vitesses"</span>,</a>
+<a class="sourceLine" id="cb8-16" title="16">       <span class="dt">x =</span> <span class="st">"Vitesses"</span>, <span class="dt">y =</span> <span class="ot">NULL</span>, <span class="dt">fill =</span> <span class="st">"Carburateurs"</span>,</a>
+<a class="sourceLine" id="cb8-17" title="17">       <span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-18" title="18"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/guides">guides</a></span>(<span class="dt">fill =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/guide_legend">guide_legend</a></span>(<span class="dt">ncol =</span> <span class="dv">6</span>))</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-7-3.png" width="75%" style="display: block; margin: auto;"></p>
+<p>Lignes</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="dt">data =</span> iris, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> Sepal.Length, <span class="dt">y =</span> Sepal.Width,</a>
+<a class="sourceLine" id="cb9-2" title="2">                        <span class="dt">colour =</span> Species, <span class="dt">shape =</span> Species)) <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb9-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="fl">1.5</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(</a>
+<a class="sourceLine" id="cb9-6" title="6">    <span class="dt">title =</span> <span class="st">"Width knowing length of iris sepals"</span>,</a>
+<a class="sourceLine" id="cb9-7" title="7">    <span class="dt">x =</span> <span class="ot">NULL</span>, <span class="dt">y =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb9-8" title="8">    <span class="dt">colour =</span> <span class="st">"Espèce"</span>, <span class="dt">shape =</span> <span class="st">"Espèce"</span>,</a>
+<a class="sourceLine" id="cb9-9" title="9">    <span class="dt">caption =</span> <span class="st">"Fisher's et Anderson's"</span></a>
+<a class="sourceLine" id="cb9-10" title="10">  ) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-11" title="11"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_smooth">geom_smooth</a></span>(<span class="dt">method =</span> <span class="st">"auto"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb9-12" title="12"><span class="st">  </span><span class="kw"><a href="../reference/theme_dreal.html">theme_dreal</a></span>(<span class="dt">caption.position =</span> <span class="st">"right"</span>)</a></code></pre></div>
+<pre><code>#&gt; `geom_smooth()` using method = 'loess' and formula 'y ~ x'</code></pre>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-8-1.png" width="75%" style="display: block; margin: auto;"></p>
+<p>Violin/Boxplot</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1">g1 &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="dt">color =</span> <span class="kw"><a href="../reference/dreal_cols.html">dreal_cols</a></span>(<span class="st">"secondary_active"</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/theme_dreal.html">theme_dreal</a></span>()<span class="op">+</span></a>
+<a class="sourceLine" id="cb11-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/stat_summary">stat_summary</a></span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">"point"</span>, <span class="dt">size =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb11-6" title="6">               <span class="dt">color =</span> <span class="kw"><a href="../reference/dreal_cols.html">dreal_cols</a></span>(<span class="st">"warning_active"</span>), <span class="dt">shape =</span> <span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb11-7" title="7"></a>
+<a class="sourceLine" id="cb11-8" title="8"><span class="co"># OU</span></a>
+<a class="sourceLine" id="cb11-9" title="9">g2 &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-10" title="10"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-11" title="11"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_violin">geom_violin</a></span>(<span class="dt">color =</span> <span class="kw"><a href="../reference/dreal_cols.html">dreal_cols</a></span>(<span class="st">"secondary_active"</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-12" title="12"><span class="st">  </span><span class="kw"><a href="../reference/theme_dreal.html">theme_dreal</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-13" title="13"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/stat_summary">stat_summary</a></span>(<span class="dt">fun.y =</span> median, <span class="dt">geom =</span> <span class="st">"point"</span>,</a>
+<a class="sourceLine" id="cb11-14" title="14">               <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="kw"><a href="../reference/dreal_cols.html">dreal_cols</a></span>(<span class="st">"warning_active"</span>),</a>
+<a class="sourceLine" id="cb11-15" title="15">               <span class="dt">shape =</span> <span class="dv">16</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-16" title="16"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/stat_summary">stat_summary</a></span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">"point"</span>,</a>
+<a class="sourceLine" id="cb11-17" title="17">               <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="kw"><a href="../reference/dreal_cols.html">dreal_cols</a></span>(<span class="st">"secondary_active"</span>),</a>
+<a class="sourceLine" id="cb11-18" title="18">               <span class="dt">shape =</span> <span class="dv">3</span>)</a>
+<a class="sourceLine" id="cb11-19" title="19"><span class="co">## OU</span></a>
+<a class="sourceLine" id="cb11-20" title="20">g3 &lt;-<span class="st"> </span>iris <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb11-21" title="21"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-22" title="22"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_violin">geom_violin</a></span>(<span class="dt">color =</span> <span class="kw"><a href="../reference/dreal_cols.html">dreal_cols</a></span>(<span class="st">"secondary_active"</span>), </a>
+<a class="sourceLine" id="cb11-23" title="23">              <span class="dt">fill =</span> <span class="kw"><a href="../reference/dreal_cols.html">dreal_cols</a></span>(<span class="st">"secondary_light"</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-24" title="24"><span class="st">  </span><span class="kw"><a href="../reference/theme_dreal.html">theme_dreal</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-25" title="25"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_boxplot">geom_boxplot</a></span>(<span class="dt">width =</span> <span class="fl">0.1</span>, <span class="dt">color =</span> <span class="kw"><a href="../reference/dreal_cols.html">dreal_cols</a></span>(<span class="st">"secondary_active"</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb11-26" title="26"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/stat_summary">stat_summary</a></span>(<span class="dt">fun.y =</span> mean, <span class="dt">geom =</span> <span class="st">"point"</span>,</a>
+<a class="sourceLine" id="cb11-27" title="27">               <span class="dt">size =</span> <span class="dv">3</span>, <span class="dt">color =</span> <span class="kw"><a href="../reference/dreal_cols.html">dreal_cols</a></span>(<span class="st">"warning_active"</span>),</a>
+<a class="sourceLine" id="cb11-28" title="28">               <span class="dt">shape =</span> <span class="dv">16</span>)</a>
+<a class="sourceLine" id="cb11-29" title="29"></a>
+<a class="sourceLine" id="cb11-30" title="30"><span class="co"># All possibilities</span></a>
+<a class="sourceLine" id="cb11-31" title="31">cowplot<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/cowplot/topics/plot_grid">plot_grid</a></span>(<span class="dt">plotlist =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(g1, g2, g3), <span class="dt">ncol =</span> <span class="dv">3</span>)</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-9-1.png" width="75%" style="display: block; margin: auto;"></p>
+<div id="fixer-les-couleurs-par-default" class="section level3">
+<h3 class="hasAnchor">
+<a href="#fixer-les-couleurs-par-default" class="anchor"></a>Fixer les couleurs par défault</h3>
+<p>Il est possible de définir des couleurs par défaut pour les différents types de graphiques avec <code><a href="../reference/dreal_geom_defaults.html">dreal_geom_defaults()</a></code>.</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># Original</span></a>
+<a class="sourceLine" id="cb12-2" title="2">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb12-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_violin">geom_violin</a></span>()</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-10-1.png" width="50%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># Set dreal defaults</span></a>
+<a class="sourceLine" id="cb13-2" title="2"><span class="kw"><a href="../reference/dreal_geom_defaults.html">dreal_geom_defaults</a></span>()</a>
+<a class="sourceLine" id="cb13-3" title="3">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb13-4" title="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_violin">geom_violin</a></span>()</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-10-2.png" width="50%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1"><span class="co"># Restore ggplot2 defaults</span></a>
+<a class="sourceLine" id="cb14-2" title="2"><span class="kw"><a href="../reference/dreal_geom_defaults.html">dreal_geom_defaults</a></span>(<span class="st">"ggplot2"</span>)</a>
+<a class="sourceLine" id="cb14-3" title="3">iris <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb14-4" title="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> Species, <span class="dt">y =</span> Sepal.Length)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb14-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_violin">geom_violin</a></span>()</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-10-3.png" width="50%" style="display: block; margin: auto;"></p>
+</div>
+</div>
+<div id="theme-avec-drealize-pour-un-format-de-type-multiplot" class="section level2">
+<h2 class="hasAnchor">
+<a href="#theme-avec-drealize-pour-un-format-de-type-multiplot" class="anchor"></a>Thème avec <code>drealize</code> pour un format de type <em>multiplot</em>
 </h2>
 <p>C’est le format le plus proche de la proposition graphique. Cependant, il ne fonctionne pas comme un theme classique. Il nécessite d’ajouter une fonction <code>drealize</code> à chaque graphique à la place de l’écriture du titre.</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># directly in a plot</span></a>
-<a class="sourceLine" id="cb4-2" title="2">g &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-3" title="3"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>()</a>
-<a class="sourceLine" id="cb4-5" title="5"></a>
-<a class="sourceLine" id="cb4-6" title="6">g2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/drealize.html">drealize</a></span>(g, </a>
-<a class="sourceLine" id="cb4-7" title="7">         <span class="dt">title =</span> <span class="st">"Plot created with drealize()"</span>,</a>
-<a class="sourceLine" id="cb4-8" title="8">         <span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
-<a class="sourceLine" id="cb4-9" title="9">         <span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
-<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-3-1.png" width="672" style="display: block; margin: auto;"></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># ggsave(g2, filename = "g2.png")</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="co"># facet plot</span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="co"># facet plot</span></a>
-<a class="sourceLine" id="cb5-4" title="4">g3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-7" title="7"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-8" title="8"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/vars">vars</a></span>(carb))</a>
-<a class="sourceLine" id="cb5-9" title="9"></a>
-<a class="sourceLine" id="cb5-10" title="10"><span class="kw"><a href="../reference/drealize.html">drealize</a></span>(g3, </a>
-<a class="sourceLine" id="cb5-11" title="11">         <span class="dt">title =</span> <span class="st">"Facet plot created with drealize()"</span>,</a>
-<a class="sourceLine" id="cb5-12" title="12">         <span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
-<a class="sourceLine" id="cb5-13" title="13">         <span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
-<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-3-2.png" width="672" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="co"># directly in a plot</span></a>
+<a class="sourceLine" id="cb15-2" title="2">g &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-3" title="3"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-4" title="4"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>()</a>
+<a class="sourceLine" id="cb15-5" title="5"></a>
+<a class="sourceLine" id="cb15-6" title="6">g2 &lt;-<span class="st"> </span><span class="kw"><a href="../reference/drealize.html">drealize</a></span>(g, </a>
+<a class="sourceLine" id="cb15-7" title="7">         <span class="dt">title =</span> <span class="st">"Plot created with drealize()"</span>,</a>
+<a class="sourceLine" id="cb15-8" title="8">         <span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
+<a class="sourceLine" id="cb15-9" title="9">         <span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-11-1.png" width="75%" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># facet plot</span></a>
+<a class="sourceLine" id="cb16-2" title="2">g3 &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-4" title="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb16-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/vars">vars</a></span>(carb))</a>
+<a class="sourceLine" id="cb16-7" title="7"></a>
+<a class="sourceLine" id="cb16-8" title="8"><span class="kw"><a href="../reference/drealize.html">drealize</a></span>(g3, </a>
+<a class="sourceLine" id="cb16-9" title="9">         <span class="dt">title =</span> <span class="st">"Facet plot created with drealize()"</span>,</a>
+<a class="sourceLine" id="cb16-10" title="10">         <span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
+<a class="sourceLine" id="cb16-11" title="11">         <span class="dt">legend.position =</span> <span class="st">"bottom"</span>)</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-11-2.png" width="75%" style="display: block; margin: auto;"></p>
 <p>Les graphiques avec légende à droite peuvent nécessiter de définir des tailles de sorties des graphs dans un Rmd pour ajuster les ratios</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Plot with legend on the right</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="co"># directly in a plot</span></a>
-<a class="sourceLine" id="cb6-3" title="3">g &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>()</a>
-<a class="sourceLine" id="cb6-6" title="6"></a>
-<a class="sourceLine" id="cb6-7" title="7"><span class="kw"><a href="../reference/drealize.html">drealize</a></span>(g, </a>
-<a class="sourceLine" id="cb6-8" title="8">         <span class="dt">title =</span> <span class="st">"Plot created with drealize()"</span>,</a>
-<a class="sourceLine" id="cb6-9" title="9">         <span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
-<a class="sourceLine" id="cb6-10" title="10">         <span class="dt">legend.position =</span> <span class="st">"right"</span>)</a></code></pre></div>
-<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-4-1.png" width="864" style="display: block; margin: auto;"></p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># Plot with legend on the right</span></a>
+<a class="sourceLine" id="cb17-2" title="2"><span class="co"># directly in a plot</span></a>
+<a class="sourceLine" id="cb17-3" title="3">g &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-4" title="4"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb17-5" title="5"><span class="st">  </span><span class="kw"><a href="../reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>()</a>
+<a class="sourceLine" id="cb17-6" title="6"></a>
+<a class="sourceLine" id="cb17-7" title="7"><span class="kw"><a href="../reference/drealize.html">drealize</a></span>(g, </a>
+<a class="sourceLine" id="cb17-8" title="8">         <span class="dt">title =</span> <span class="st">"Plot created with drealize()"</span>,</a>
+<a class="sourceLine" id="cb17-9" title="9">         <span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
+<a class="sourceLine" id="cb17-10" title="10">         <span class="dt">legend.position =</span> <span class="st">"right"</span>)</a></code></pre></div>
+<p><img src="ab-ggplot2-themes_files/figure-html/unnamed-chunk-12-1.png" width="75%" style="display: block; margin: auto;"></p>
 </div>
   </div>
 
@@ -195,8 +350,10 @@
 <a href="#tocnav" class="anchor"></a>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
 <li><a href="#packages">Packages</a></li>
-      <li><a href="#theme-ggplot">Thème ggplot</a></li>
-      <li><a href="#theme-avec-un-format-multiplot">Thème avec un format <em>multiplot</em></a></li>
+      <li><a href="#fonts">Fonts</a></li>
+      <li><a href="#theme-ggplot2">Thème ggplot2</a></li>
+      <li><a href="#autres-graphiques">Autres graphiques</a></li>
+      <li><a href="#theme-avec-drealize-pour-un-format-de-type-multiplot">Thème avec <code>drealize</code> pour un format de type <em>multiplot</em></a></li>
       </ul>
 </div>
       </div>

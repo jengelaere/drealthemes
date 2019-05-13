@@ -5,7 +5,7 @@
 \title{transform a ggplot with the DREAL theme}
 \usage{
 drealize(g, legend.position = "bottom", title = "Title of the graph",
-  caption = "Source : DREAL", heights, widths, ...)
+  caption = "Source : DREAL", heights, widths, text.size = 12, ...)
 }
 \arguments{
 \item{g}{a ggplot}
@@ -22,6 +22,8 @@ Default to c(1, 9, 0.5) for legend.position = "left".}
 
 \item{widths}{widths of the two columns of plot with legend.position = "left".
 Default to c(4, 1).}
+
+\item{text.size}{main text size in pts.}
 
 \item{...}{other parameters of \code{ggplot2::\link[ggplot2]{theme}}}
 }

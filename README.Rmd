@@ -9,7 +9,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
-  out.width = "100%"
+  out.width = "70%",
+  fig.align = "center"
 )
 ```
 # drealthemes
@@ -41,10 +42,9 @@ remotes::install_local("drealthemes_0.0.0.tar.gz")
 drealthemes::open_pkgdown()
 ```
 
+## Examples
 
-## Example
-
-```{r example}
+```{r example, message=FALSE}
 library(drealthemes)
 library(dplyr)
 library(ggplot2)
@@ -63,6 +63,59 @@ tibble(
   scale_fill_manual(values = dreal_colors) +
   guides(fill = FALSE) +
   theme_void()
+```
+
+## Classic {ggplot2} theme
+
+See the vignette for others possibilities.
+
+- `theme_dreal_light()`
+```{r}
+ggplot(mtcars) +
+  aes(hp, mpg, colour = as.character(gear)) +
+  geom_point(size = 4, alpha = .8) +
+  scale_color_dreal_d() +
+  ggtitle("Distance parcourue selon la puissance") +
+  labs(caption = "Source: DREAL",
+       colour = "Nombre de vitesses :",
+       x = "Puissance", y = "Nombre de miles par galon") +
+  theme_dreal_light()
+```
+
+  
+- `theme_dreal_dark()`
+```{r}
+ggplot(mtcars) +
+  aes(hp, mpg, colour = as.character(gear)) +
+  geom_point(size = 4, alpha = .8) +
+  scale_color_dreal_d() +
+  ggtitle("Distance parcourue selon la puissance") +
+  labs(caption = "Source: DREAL",
+       colour = "Nombre de vitesses :",
+       x = "Puissance", y = "Nombre de miles par galon") +
+  theme_dreal_dark()
+```
+
+  
+- `theme_dreal_light(flipped = TRUE)`
+```{r}
+mtcars %>% 
+  group_by(gear, carb = as.character(carb)) %>% 
+  summarise(n = n()) %>% 
+  ggplot() +
+  geom_col(aes(as.factor(gear), n, fill = carb),
+           position = position_fill(reverse = TRUE),
+           width = 0.66) +
+  # dreal
+  scale_fill_dreal_d() +
+  theme_dreal(flipped = TRUE, caption.position = "right") +
+  coord_flip() +
+  # additionnal tweaks
+  scale_y_continuous(expand = expand_scale(0, 0)) +
+  labs(title = "Véhicules selon nombre de carburateurs et de vitesses",
+       x = "Vitesses", y = NULL, fill = "Carburateurs",
+       caption = "Source: DREAL") +
+  guides(fill = guide_legend(ncol = 6))
 ```
 
 ## Thème avec `drealize`

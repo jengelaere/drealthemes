@@ -7,18 +7,25 @@
 \title{ggplot2 themes for Dreal}
 \usage{
 theme_dreal_dark(legend.position = c("bottom", "right"),
-  caption.position = c("left", "right"), ...)
+  caption.position = c("left", "right"), flipped = FALSE,
+  text.size = 13, ...)
 
 theme_dreal_light(legend.position = c("bottom", "right"),
-  caption.position = c("left", "right"), ...)
+  caption.position = c("left", "right"), flipped = FALSE,
+  text.size = 13, ...)
 
 theme_dreal(type = c("light", "dark"), legend.position = c("bottom",
-  "right"), caption.position = c("left", "right"), ...)
+  "right"), caption.position = c("left", "right"), flipped = FALSE,
+  text.size = 13, ...)
 }
 \arguments{
 \item{legend.position}{position of the legend "bottom" or "right"}
 
 \item{caption.position}{position of the caption "left" or "right"}
+
+\item{flipped}{Logical. Whether \code{\link[ggplot2]{coord_flip}} has been added to the plot}
+
+\item{text.size}{main text size in pts.}
 
 \item{...}{Other parameters of \code{\link[ggplot2]{theme}}}
 
