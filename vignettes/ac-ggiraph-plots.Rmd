@@ -1,0 +1,52 @@
+---
+title: "ggiraph plot"
+output:
+  rmarkdown::html_vignette:
+    css: uikit.css
+    toc: yes
+vignette: >
+  %\VignetteIndexEntry{ac-ggiraph-plots}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<link href="https://fonts.googleapis.com/css?family=Raleway:400,600,700|Roboto+Slab:300,400,700" rel="stylesheet">
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  out.width = "75%"
+)
+```
+
+## Packages
+```{r, message=FALSE}
+library(drealthemes)
+library(ggplot2)
+library(dplyr)
+library(ggiraph)
+```
+
+## Plot
+```{r, fig.width=7, fig.height=7}
+g <- mtcars %>% 
+  tibble::rownames_to_column("name") %>% 
+  ggplot() +
+  aes(hp, mpg, colour = as.character(gear), tooltip = name) +
+  geom_point_interactive(size = 4, alpha = .8) +
+  scale_color_dreal_d() +
+  ggtitle("Distance parcourue selon la puissance") +
+  labs(caption = "Source: DREAL",
+       colour = "Nombre de vitesses :",
+       x = "Puissance", y = "Nombre de miles par galon") +
+  theme_dreal_light()
+
+g
+```
+
+Avec {ggiraph}
+```{r}
+girafe(ggobj = g)
+```
+

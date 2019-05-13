@@ -35,10 +35,6 @@ if (FALSE) {
 library(drealthemes)
 library(ggplot2)
 library(dplyr)
-# Just for rsconnect
-# library(cowplot)
-# library(grid)
-# library(gridExtra)
 ```
 
 ## Fonts

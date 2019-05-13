@@ -61,6 +61,7 @@ usethis::use_news_md()
 # _Vignette
 usethis::use_vignette("aa-colour-palettes")
 usethis::use_vignette("ab-ggplot2-themes")
+usethis::use_vignette("ac-ggiraph-plots")
 devtools::build_vignettes()
 
 # _Book

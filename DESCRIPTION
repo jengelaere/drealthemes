@@ -33,6 +33,7 @@ Imports:
 Suggests: 
     bookdown,
     dplyr,
+    ggiraph,
     knitr,
     pkgdown,
     rmarkdown

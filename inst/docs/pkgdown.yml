@@ -4,4 +4,5 @@ pkgdown_sha: ~
 articles:
   aa-colour-palettes: aa-colour-palettes.html
   ab-ggplot2-themes: ab-ggplot2-themes.html
+  ac-ggiraph-plots: ac-ggiraph-plots.html
 
