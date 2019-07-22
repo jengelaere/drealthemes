@@ -2,6 +2,7 @@
 % Please edit documentation in R/ggplot2-scales.R
 \name{scale_color_dreal_c}
 \alias{scale_color_dreal_c}
+\alias{scale_colour_dreal_c}
 \title{Continuous color scale constructor for dreal colors}
 \usage{
 scale_color_dreal_c(..., palette = "continuous", reverse = FALSE)

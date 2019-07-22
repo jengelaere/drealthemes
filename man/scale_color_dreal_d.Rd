@@ -2,9 +2,10 @@
 % Please edit documentation in R/ggplot2-scales.R
 \name{scale_color_dreal_d}
 \alias{scale_color_dreal_d}
+\alias{scale_colour_dreal_d}
 \title{Discrete color scale constructor for dreal colors}
 \usage{
-scale_color_dreal_d(..., palette = "discrete", reverse = FALSE)
+scale_color_dreal_d(..., palette = "discrete_long", reverse = FALSE)
 }
 \arguments{
 \item{...}{Additional arguments passed to scale_color_manual()}

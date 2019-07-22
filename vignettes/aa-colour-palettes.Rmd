@@ -92,6 +92,11 @@ ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
     geom_point(size = 4) +
     scale_color_dreal_c()
 
+# Colour by numeric variable with default palette
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Sepal.Length)) +
+    geom_point(size = 4) +
+    scale_colour_dreal_c()
+
 # Color by discrete variable with default palette
 ggplot(iris, aes(Sepal.Width, fill = Species)) +
     geom_histogram(size = 4, bins = 20) +

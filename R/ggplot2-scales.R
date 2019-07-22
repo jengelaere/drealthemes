@@ -11,6 +11,11 @@ scale_color_dreal_c <- function(..., palette = "continuous", reverse = FALSE) {
   scale_color_gradientn(..., colours = pal(256))
 }
 
+#' @export
+#' @rdname scale_color_dreal_c
+#' @usage NULL
+scale_colour_dreal_c <- scale_color_dreal_c
+
 #' Discrete color scale constructor for dreal colors
 #'
 #' @param palette Character name of palette in dreal_palettes
@@ -25,12 +30,18 @@ scale_color_dreal_c <- function(..., palette = "continuous", reverse = FALSE) {
 #' ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
 #'    geom_point(size = 4) +
 #'    scale_color_dreal_d()
-scale_color_dreal_d <- function(..., palette = "discrete", reverse = FALSE) {
+scale_color_dreal_d <- function(..., palette = "discrete_long", reverse = FALSE) {
   pal <- unname(dreal_palettes[[palette]])
   if (reverse) pal <- rev(pal)
   # discrete_scale("colour", paste0("dreal_", palette), palette = pal, ...)
   scale_color_manual(..., values = pal)
 }
+
+#' @export
+#' @rdname scale_color_dreal_d
+#' @usage NULL
+scale_colour_dreal_d <- scale_color_dreal_d
+
 
 #' Continuous fill scale constructor for dreal colors
 #'
