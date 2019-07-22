@@ -227,7 +227,7 @@ theme_dreal_light <- function(legend.position = c("bottom", "right"),
       legend.justification = "left",
 
       legend.background = element_rect(fill = "white", colour = NA),
-      plot.background = element_rect(fill = "white"),
+      plot.background = element_rect(fill = "white", colour = NA),
       panel.background = element_rect(fill = "white", colour = NA),
       strip.background = element_rect(fill = dreal_cols("primary"), colour = NA),
 
