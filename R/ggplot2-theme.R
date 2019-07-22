@@ -34,7 +34,7 @@ ggempty <- function(plot = NULL, xlim = c(0, 1), ylim = c(0, 1), ...)
 #' @param text.size main text size in pts.
 #' @param ... other parameters of \code{ggplot2::\link[ggplot2]{theme}}
 #'
-#' @importFrom ggplot2 theme_minimal theme margin
+#' @importFrom ggplot2 theme_minimal theme margin %+replace%
 #' @importFrom ggplot2 element_text element_rect element_blank element_line
 #' @importFrom cowplot draw_grob get_legend
 #' @importFrom grid grobTree rectGrob textGrob gpar
@@ -75,7 +75,7 @@ drealize <- function(g, legend.position = "bottom", title = "Title of the graph"
 
   # legend.position == "bottom"
   theme_list <- list(
-    theme_minimal() +
+    theme_minimal() %+replace%
       theme(
         # title = element_text(colour = "white", face = "bold"),
         axis.text = element_text(colour = "black", size = text.size,
@@ -138,7 +138,7 @@ drealize <- function(g, legend.position = "bottom", title = "Title of the graph"
 #' @param text.size main text size in pts.
 #' @param ... Other parameters of \code{\link[ggplot2]{theme}}
 #'
-#' @importFrom ggplot2 theme_minimal theme element_text element_rect element_blank element_line
+#' @importFrom ggplot2 theme_minimal theme element_text element_rect element_blank element_line %+replace%
 #'
 #' @rdname theme_dreal
 #' @export
@@ -165,7 +165,10 @@ theme_dreal_dark <- function(legend.position = c("bottom", "right"),
 
   theme_minimal() +
     theme(
-      text = element_text(family = "Raleway", size = text.size),
+      text = element_text(family = "Raleway", size = text.size)
+    ) %+replace%
+    theme(
+      # text = element_text(family = "Raleway", size = text.size),
       plot.title = element_text(margin = margin(t = 10, b = 15)),
 
       legend.position = legend.position,
@@ -216,9 +219,8 @@ theme_dreal_light <- function(legend.position = c("bottom", "right"),
                                        colour = dreal_cols("info_light"))
   }
 
-  theme_minimal() +
+  theme_minimal() %+replace%
     theme(
-      text = element_text(family = "Raleway", size = text.size),
       plot.title = element_text(margin = margin(t = 10, b = 15)),
 
       legend.position = legend.position,
@@ -242,6 +244,9 @@ theme_dreal_light <- function(legend.position = c("bottom", "right"),
       axis.ticks.y.left = element_line(colour = dreal_cols("info_light")),
       axis.line.y.left = element_line(colour = dreal_cols("info")),
       ...
+    ) +
+    theme(
+      text = element_text(family = "Raleway", size = text.size)
     )
 
 }
