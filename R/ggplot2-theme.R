@@ -144,7 +144,7 @@ drealize <- function(g, legend.position = "bottom", title = "Title of the graph"
 #' @export
 
 theme_dreal_dark <- function(legend.position = c("bottom", "right"),
-                             caption.position = c("left", "right"),
+                             caption.position = c("right", "left"),
                              flipped = FALSE,
                              text.size = 13,
                              ...) {
@@ -200,7 +200,7 @@ theme_dreal_dark <- function(legend.position = c("bottom", "right"),
 #' @rdname theme_dreal
 #' @export
 theme_dreal_light <- function(legend.position = c("bottom", "right"),
-                              caption.position = c("left", "right"),
+                              caption.position = c("right", "left"),
                               flipped = FALSE,
                               text.size = 13,
                               ...) {
@@ -258,7 +258,7 @@ theme_dreal_light <- function(legend.position = c("bottom", "right"),
 #' @export
 theme_dreal <- function(type = c("light", "dark"),
                         legend.position = c("bottom", "right"),
-                        caption.position = c("left", "right"),
+                        caption.position = c("right", "left"),
                         flipped = FALSE, text.size = 13,
                         ...) {
 
