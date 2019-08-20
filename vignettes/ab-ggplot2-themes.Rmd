@@ -56,11 +56,11 @@ Voici une sortie pour vérifier
 ```{r}
 g <- ggplot(mtcars) +
   geom_point(aes(cyl, mpg)) +
-  labs(title = "Mon titre avec Roboto Slab",
-       x = "lab X avec Raleway",
+  labs(title = "Mon titre avec Roboto",
+       x = "lab X avec Lato",
        y = "Lab Y avec Caveat") +
-  theme(title = element_text(family = "Roboto Slab"),
-        axis.title.x = element_text(family = "Raleway"),
+  theme(title = element_text(family = "Roboto"),
+        axis.title.x = element_text(family = "Lato"),
         axis.title.y = element_text(family = "Caveat")
   )
 ```

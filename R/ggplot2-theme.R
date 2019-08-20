@@ -143,8 +143,8 @@ drealize <- function(g, legend.position = "bottom", title = "Title of the graph"
 #' @rdname theme_dreal
 #' @export
 
-theme_dreal_dark <- function(legend.position = c("bottom", "right"),
-                             caption.position = c("right", "left"),
+theme_dreal_dark <- function(legend.position = "bottom",
+                             caption.position = "right",
                              flipped = FALSE,
                              text.size = 13,
                              ...) {
@@ -165,10 +165,10 @@ theme_dreal_dark <- function(legend.position = c("bottom", "right"),
 
   theme_minimal() +
     theme(
-      text = element_text(family = "Raleway", size = text.size)
+      text = element_text(family = "Lato", size = text.size)
     ) %+replace%
     theme(
-      # text = element_text(family = "Raleway", size = text.size),
+      # text = element_text(family = "Lato", size = text.size),
       plot.title = element_text(margin = margin(t = 10, b = 15)),
 
       legend.position = legend.position,
@@ -199,8 +199,8 @@ theme_dreal_dark <- function(legend.position = c("bottom", "right"),
 #' theme_dreal_light
 #' @rdname theme_dreal
 #' @export
-theme_dreal_light <- function(legend.position = c("bottom", "right"),
-                              caption.position = c("right", "left"),
+theme_dreal_light <- function(legend.position = "bottom",
+                              caption.position = "right",
                               flipped = FALSE,
                               text.size = 13,
                               ...) {
@@ -246,7 +246,7 @@ theme_dreal_light <- function(legend.position = c("bottom", "right"),
       ...
     ) +
     theme(
-      text = element_text(family = "Raleway", size = text.size)
+      text = element_text(family = "Lato", size = text.size)
     )
 
 }
@@ -256,9 +256,9 @@ theme_dreal_light <- function(legend.position = c("bottom", "right"),
 #' @param type Choose theme type
 #' @rdname theme_dreal
 #' @export
-theme_dreal <- function(type = c("light", "dark"),
-                        legend.position = c("bottom", "right"),
-                        caption.position = c("right", "left"),
+theme_dreal <- function(type = "light",
+                        legend.position = "bottom",
+                        caption.position = "right",
                         flipped = FALSE, text.size = 13,
                         ...) {
 
@@ -275,7 +275,7 @@ theme_dreal <- function(type = c("light", "dark"),
 #' @param default Choose which default to set "dreal", "ggplot2"
 #'
 #' @export
-dreal_geom_defaults <- function(default = c("dreal", "ggplot2")) {
+dreal_geom_defaults <- function(default = "dreal") {
 
   default <- match.arg(default, c("dreal", "ggplot2"), several.ok = FALSE)
 

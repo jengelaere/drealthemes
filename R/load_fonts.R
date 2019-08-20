@@ -47,16 +47,16 @@ load_fonts <- function() {
 #' library(ggplot2)
 #' ggplot(mtcars) +
 #'   geom_point(aes(cyl, mpg)) +
-#'   labs(title = "Mon titre avec Roboto Slab",
-#'        x = "lab X avec Raleway",
+#'   labs(title = "Mon titre avec Roboto",
+#'        x = "lab X avec Lato",
 #'        y = "Lab Y avec Caveat") +
-#'   theme(title = element_text(family = "Roboto Slab"),
-#'         axis.title.x = element_text(family = "Raleway"),
+#'   theme(title = element_text(family = "Roboto"),
+#'         axis.title.x = element_text(family = "Lato"),
 #'         axis.title.y = element_text(family = "Caveat")
 #'   )
 #' }
 
-check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Caveat"),
+check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Caveat", "Roboto", "Lato"),
                              import = TRUE,
                              verbose = TRUE, browse = FALSE) {
 
@@ -85,7 +85,7 @@ check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Caveat"),
             paste(names(res)[!res], collapse = ", "), ".",
             "\n1 - Run : check_fonts_in_r(browse = TRUE) to find fonts.",
             "\n  To install, see for instance: https://www.howtogeek.com/192980/how-to-install-remove-and-manage-fonts-on-windows-mac-and-linux/",
-            "\n2 - Run check_fonts_in_r(install = TRUE) after fonts installation."
+            "\n2 - Run check_fonts_in_r() after fonts installation."
     )
     if (isTRUE(browse)) {
       zip_fonts <- system.file("fonts.zip", package = "drealthemes")
@@ -109,8 +109,8 @@ check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Caveat"),
 #   extrafont::ttf_import(dir_fonts)
 # }
 # https://www.howtogeek.com/192980/how-to-install-remove-and-manage-fonts-on-windows-mac-and-linux/
-# if (extrafont::choose_font("Raleway") == "") {
-#   dir_fonts <- system.file("fonts/Raleway", package = "drealthemes")
+# if (extrafont::choose_font("Lato") == "") {
+#   dir_fonts <- system.file("fonts/Lato", package = "drealthemes")
 #   extrafont::ttf_import(dir_fonts)
 # }
 # if (extrafont::choose_font("Roboto Slab") == "") {
@@ -145,21 +145,21 @@ check_fonts_in_r <- function(fonts = c("Raleway", "Roboto Slab", "Caveat"),
 #                      regular = "RobotoSlab-Regular.ttf",
 #                      bold = "RobotoSlab-Bold.ttf")
 # }
-# if (!"Raleway" %in% sysfonts::font_families()) {
-#   dir_fonts <- system.file("fonts/Raleway", package = "drealthemes")
+# if (!"Lato" %in% sysfonts::font_families()) {
+#   dir_fonts <- system.file("fonts/Lato", package = "drealthemes")
 #   sysfonts::font_paths(dir_fonts)
-#   sysfonts::font_add("Raleway",
-#                      regular = "Raleway-Regular.ttf",
-#                      bold = "Raleway-Bold.ttf",
-#                      italic = "Raleway-Italic.ttf",
-#                      bolditalic = "Raleway-BoldItalic.ttf")
+#   sysfonts::font_add("Lato",
+#                      regular = "Lato-Regular.ttf",
+#                      bold = "Lato-Bold.ttf",
+#                      italic = "Lato-Italic.ttf",
+#                      bolditalic = "Lato-BoldItalic.ttf")
 # }
 # showtext::showtext_auto()
 #
 # g <- ggplot(mtcars) +
 #   geom_point(aes(cyl, mpg)) +
 #   labs(title = "Mon titre avec font") +
-#   # theme(title = element_text(family = "Raleway", face = "bold"))
+#   # theme(title = element_text(family = "Lato", face = "bold"))
 #   # theme(title = element_text(family = "Caveat"))
 #   theme(title = element_text(family = "Roboto Slab"))
 # g

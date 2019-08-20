@@ -6,17 +6,14 @@
 \alias{theme_dreal}
 \title{ggplot2 themes for Dreal}
 \usage{
-theme_dreal_dark(legend.position = c("bottom", "right"),
-  caption.position = c("left", "right"), flipped = FALSE,
-  text.size = 13, ...)
+theme_dreal_dark(legend.position = "bottom",
+  caption.position = "right", flipped = FALSE, text.size = 13, ...)
 
-theme_dreal_light(legend.position = c("bottom", "right"),
-  caption.position = c("left", "right"), flipped = FALSE,
-  text.size = 13, ...)
+theme_dreal_light(legend.position = "bottom",
+  caption.position = "right", flipped = FALSE, text.size = 13, ...)
 
-theme_dreal(type = c("light", "dark"), legend.position = c("bottom",
-  "right"), caption.position = c("left", "right"), flipped = FALSE,
-  text.size = 13, ...)
+theme_dreal(type = "light", legend.position = "bottom",
+  caption.position = "right", flipped = FALSE, text.size = 13, ...)
 }
 \arguments{
 \item{legend.position}{position of the legend "bottom" or "right"}

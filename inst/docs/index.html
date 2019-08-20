@@ -47,7 +47,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">drealthemes</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.1.9000</span>
       </span>
     </div>
 
@@ -79,6 +79,9 @@
       <a href="articles/ac-ggiraph-plots.html">ggiraph plot</a>
     </li>
   </ul>
+</li>
+<li>
+  <a href="news/index.html">Changelog</a>
 </li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
@@ -142,13 +145,13 @@
 <a class="sourceLine" id="cb4-9" title="9">  <span class="dt">y =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="dv">1</span><span class="op">:</span><span class="dv">6</span>, <span class="dt">times =</span> <span class="dv">3</span>),</a>
 <a class="sourceLine" id="cb4-10" title="10">  <span class="dt">names =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(dreal_colors), </a>
 <a class="sourceLine" id="cb4-11" title="11">  <span class="dt">colors =</span> dreal_colors) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb4-12" title="12"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-13" title="13"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(x, y, <span class="dt">fill =</span> names) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-14" title="14"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_tile">geom_tile</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-15" title="15"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_text">geom_text</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">label =</span> names)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-16" title="16"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_manual">scale_fill_manual</a></span>(<span class="dt">values =</span> dreal_colors) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-17" title="17"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/guides">guides</a></span>(<span class="dt">fill =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb4-18" title="18"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_void</a></span>()</a></code></pre></div>
+<a class="sourceLine" id="cb4-12" title="12"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-13" title="13"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(x, y, <span class="dt">fill =</span> names) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-14" title="14"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-15" title="15"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_text.html">geom_text</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">label =</span> names)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-16" title="16"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_manual.html">scale_fill_manual</a></span>(<span class="dt">values =</span> dreal_colors) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-17" title="17"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span>(<span class="dt">fill =</span> <span class="ot">FALSE</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb4-18" title="18"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_void</a></span>()</a></code></pre></div>
 <p><img src="reference/figures/README-example-1.png" width="70%" style="display: block; margin: auto;"></p>
 </div>
 <div id="classic-ggplot2-theme" class="section level2">
@@ -158,12 +161,12 @@
 <ul>
 <li><code><a href="reference/theme_dreal.html">theme_dreal_light()</a></code></li>
 </ul>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-3" title="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb5-4" title="4"><span class="st">  </span><span class="kw"><a href="reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Distance parcourue selon la puissance"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb5-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Distance parcourue selon la puissance"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb5-6" title="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
 <a class="sourceLine" id="cb5-7" title="7">       <span class="dt">colour =</span> <span class="st">"Nombre de vitesses :"</span>,</a>
 <a class="sourceLine" id="cb5-8" title="8">       <span class="dt">x =</span> <span class="st">"Puissance"</span>, <span class="dt">y =</span> <span class="st">"Nombre de miles par galon"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb5-9" title="9"><span class="st">  </span><span class="kw"><a href="reference/theme_dreal.html">theme_dreal_light</a></span>()</a></code></pre></div>
@@ -171,12 +174,12 @@
 <ul>
 <li><code><a href="reference/theme_dreal.html">theme_dreal_dark()</a></code></li>
 </ul>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-2" title="2"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-3" title="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb6-4" title="4"><span class="st">  </span><span class="kw"><a href="reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Distance parcourue selon la puissance"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-6" title="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
+<a class="sourceLine" id="cb6-5" title="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Distance parcourue selon la puissance"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb6-6" title="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>,</a>
 <a class="sourceLine" id="cb6-7" title="7">       <span class="dt">colour =</span> <span class="st">"Nombre de vitesses :"</span>,</a>
 <a class="sourceLine" id="cb6-8" title="8">       <span class="dt">x =</span> <span class="st">"Puissance"</span>, <span class="dt">y =</span> <span class="st">"Nombre de miles par galon"</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb6-9" title="9"><span class="st">  </span><span class="kw"><a href="reference/theme_dreal.html">theme_dreal_dark</a></span>()</a></code></pre></div>
@@ -187,20 +190,20 @@
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1">mtcars <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/group_by.html">group_by</a></span>(gear, <span class="dt">carb =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(carb)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb7-3" title="3"><span class="st">  </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/summarise.html">summarise</a></span>(<span class="dt">n =</span> <span class="kw"><a href="https://dplyr.tidyverse.org/reference/n.html">n</a></span>()) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>() <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_bar">geom_col</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(gear), n, <span class="dt">fill =</span> carb),</a>
-<a class="sourceLine" id="cb7-6" title="6">           <span class="dt">position =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/position_stack">position_fill</a></span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>),</a>
+<a class="sourceLine" id="cb7-4" title="4"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-5" title="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_bar.html">geom_col</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/factor">as.factor</a></span>(gear), n, <span class="dt">fill =</span> carb),</a>
+<a class="sourceLine" id="cb7-6" title="6">           <span class="dt">position =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/position_stack.html">position_fill</a></span>(<span class="dt">reverse =</span> <span class="ot">TRUE</span>),</a>
 <a class="sourceLine" id="cb7-7" title="7">           <span class="dt">width =</span> <span class="fl">0.66</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb7-8" title="8"><span class="st">  </span><span class="co"># dreal</span></a>
 <a class="sourceLine" id="cb7-9" title="9"><span class="st">  </span><span class="kw"><a href="reference/scale_fill_dreal_d.html">scale_fill_dreal_d</a></span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb7-10" title="10"><span class="st">  </span><span class="kw"><a href="reference/theme_dreal.html">theme_dreal</a></span>(<span class="dt">flipped =</span> <span class="ot">TRUE</span>, <span class="dt">caption.position =</span> <span class="st">"right"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-11" title="11"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/coord_flip">coord_flip</a></span>() <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-11" title="11"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/coord_flip.html">coord_flip</a></span>() <span class="op">+</span></a>
 <a class="sourceLine" id="cb7-12" title="12"><span class="st">  </span><span class="co"># additionnal tweaks</span></a>
-<a class="sourceLine" id="cb7-13" title="13"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_continuous">scale_y_continuous</a></span>(<span class="dt">expand =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/expand_scale">expand_scale</a></span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-14" title="14"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">title =</span> <span class="st">"Véhicules selon nombre de carburateurs et de vitesses"</span>,</a>
+<a class="sourceLine" id="cb7-13" title="13"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_continuous.html">scale_y_continuous</a></span>(<span class="dt">expand =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/expand_scale.html">expand_scale</a></span>(<span class="dv">0</span>, <span class="dv">0</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb7-14" title="14"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">title =</span> <span class="st">"Véhicules selon nombre de carburateurs et de vitesses"</span>,</a>
 <a class="sourceLine" id="cb7-15" title="15">       <span class="dt">x =</span> <span class="st">"Vitesses"</span>, <span class="dt">y =</span> <span class="ot">NULL</span>, <span class="dt">fill =</span> <span class="st">"Carburateurs"</span>,</a>
 <a class="sourceLine" id="cb7-16" title="16">       <span class="dt">caption =</span> <span class="st">"Source: DREAL"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb7-17" title="17"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/guides">guides</a></span>(<span class="dt">fill =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/guide_legend">guide_legend</a></span>(<span class="dt">ncol =</span> <span class="dv">6</span>))</a></code></pre></div>
+<a class="sourceLine" id="cb7-17" title="17"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/guides.html">guides</a></span>(<span class="dt">fill =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/guide_legend.html">guide_legend</a></span>(<span class="dt">ncol =</span> <span class="dv">6</span>))</a></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="70%" style="display: block; margin: auto;"></p>
 </div>
 <div id="theme-avec-drealize" class="section level2">
@@ -209,8 +212,8 @@
 </h2>
 <p>C’est le format le plus proche de la proposition graphique. Cependant, il ne fonctionne pas comme un theme classique. Il nécessite d’ajouter une fonction <code><a href="reference/drealize.html">drealize()</a></code> à chaque graphique à la place de l’écriture du titre.</p>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># directly in a plot</span></a>
-<a class="sourceLine" id="cb8-2" title="2">g &lt;-<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(mtcars, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb8-3" title="3"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-2" title="2">g &lt;-<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(mtcars, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(hp, mpg, <span class="dt">colour =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(gear))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-3" title="3"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>(<span class="dt">size =</span> <span class="dv">4</span>, <span class="dt">alpha =</span> <span class="fl">.8</span>) <span class="op">+</span></a>
 <a class="sourceLine" id="cb8-4" title="4"><span class="st">  </span><span class="kw"><a href="reference/scale_color_dreal_d.html">scale_color_dreal_d</a></span>()</a>
 <a class="sourceLine" id="cb8-5" title="5"></a>
 <a class="sourceLine" id="cb8-6" title="6">g2 &lt;-<span class="st"> </span><span class="kw"><a href="reference/drealize.html">drealize</a></span>(g, </a>

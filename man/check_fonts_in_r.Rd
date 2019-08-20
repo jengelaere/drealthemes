@@ -4,8 +4,8 @@
 \alias{check_fonts_in_r}
 \title{Tests if fonts are available on the system and import for extrafont}
 \usage{
-check_fonts_in_r(fonts = c("Raleway", "Roboto Slab", "Caveat"),
-  import = TRUE, verbose = TRUE, browse = FALSE)
+check_fonts_in_r(fonts = c("Raleway", "Roboto Slab", "Caveat", "Roboto",
+  "Lato"), import = TRUE, verbose = TRUE, browse = FALSE)
 }
 \arguments{
 \item{fonts}{vector of fonts}
@@ -31,11 +31,11 @@ check_fonts_in_r(import = FALSE)
 library(ggplot2)
 ggplot(mtcars) +
   geom_point(aes(cyl, mpg)) +
-  labs(title = "Mon titre avec Roboto Slab",
-       x = "lab X avec Raleway",
+  labs(title = "Mon titre avec Roboto",
+       x = "lab X avec Lato",
        y = "Lab Y avec Caveat") +
-  theme(title = element_text(family = "Roboto Slab"),
-        axis.title.x = element_text(family = "Raleway"),
+  theme(title = element_text(family = "Roboto"),
+        axis.title.x = element_text(family = "Lato"),
         axis.title.y = element_text(family = "Caveat")
   )
 }

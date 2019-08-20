@@ -2,7 +2,6 @@
 .Rhistory
 .RData
 inst/doc
-rsconnect/
 vignettes/*.R
 docs/rsconnect
 inst/docs/rsconnect

@@ -4,7 +4,7 @@
 \alias{dreal_geom_defaults}
 \title{Change geom defaults to the dreal colors}
 \usage{
-dreal_geom_defaults(default = c("dreal", "ggplot2"))
+dreal_geom_defaults(default = "dreal")
 }
 \arguments{
 \item{default}{Choose which default to set "dreal", "ggplot2"}

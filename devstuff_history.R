@@ -73,14 +73,14 @@ visualidentity::build_book(clean_rmd = TRUE, clean = TRUE)
 # pkg::open_guide()
 
 # _Pkgdown
-visualidentity::build_pkgdown(
+chameleon::build_pkgdown(
   # lazy = TRUE,
   yml = system.file("pkgdown/_pkgdown.yml", package = "thinkridentity"),
   favicon = system.file("pkgdown/favicon.ico", package = "thinkridentity"),
   move = TRUE, clean_before = TRUE, clean_after = TRUE
 )
 
-visualidentity::open_pkgdown_function(path = "inst/docs")
+chameleon::open_pkgdown_function(path = "inst/docs")
 # pkg::open_pkgdown()
 
 ## __ deploy on rsconnect
