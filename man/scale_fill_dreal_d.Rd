@@ -7,9 +7,9 @@
 scale_fill_dreal_d(..., palette = "discrete", reverse = FALSE)
 }
 \arguments{
-\item{...}{Additional arguments passed to scale_fill_manual()}
+\item{...}{Additional arguments passed to \code{ggplot2::\link[ggplot2]{discrete_scale}}}
 
-\item{palette}{Character name of palette in dreal_palettes}
+\item{palette}{Character name of palette in dreal_palettes or "explore" for high number of levels}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed}
 }
@@ -21,4 +21,8 @@ library(ggplot2)
 ggplot(iris, aes(Sepal.Width, fill = Species)) +
   geom_histogram(size = 4, bins = 20) +
   scale_fill_dreal_d()
+# Long scales in exploration phase
+ggplot(iris, aes(Sepal.Width, fill = as.factor(1:nrow(iris)))) +
+  geom_histogram(size = 4, bins = 20, colour = NA) +
+  scale_fill_dreal_d(palette = "explore", guide = FALSE)
 }

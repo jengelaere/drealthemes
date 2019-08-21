@@ -2,7 +2,7 @@
 #'
 #' @param palette Character name of palette in dreal_palettes
 #' @param reverse Boolean indicating whether the palette should be reversed
-#' @param ... Additional arguments passed to scale_color_gradientn()
+#' @param ... Additional arguments passed to \code{ggplot2::\link[ggplot2]{scale_fill_gradientn}}
 #'
 #' @importFrom ggplot2 scale_color_gradientn
 #' @export
@@ -18,11 +18,11 @@ scale_colour_dreal_c <- scale_color_dreal_c
 
 #' Discrete color scale constructor for dreal colors
 #'
-#' @param palette Character name of palette in dreal_palettes
+#' @param palette Character name of palette in dreal_palettes or "explore" for high number of levels
 #' @param reverse Boolean indicating whether the palette should be reversed
-#' @param ... Additional arguments passed to scale_color_manual()
+#' @param ... Additional arguments passed to \code{ggplot2::\link[ggplot2]{discrete_scale}}
 #'
-#' @importFrom ggplot2 scale_color_manual
+#' @importFrom ggplot2 scale_colour_manual discrete_scale
 #' @export
 #'
 #' @examples
@@ -30,11 +30,24 @@ scale_colour_dreal_c <- scale_color_dreal_c
 #' ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
 #'    geom_point(size = 4) +
 #'    scale_color_dreal_d()
+#' # Long scales in exploration phase
+#' ggplot(iris, aes(Sepal.Width, Sepal.Length, color = as.factor(1:nrow(iris)))) +
+#'   geom_point(size = 4) +
+#'   scale_color_dreal_d(palette = "explore", guide = FALSE)
 scale_color_dreal_d <- function(..., palette = "discrete_long", reverse = FALSE) {
-  pal <- unname(dreal_palettes[[palette]])
-  if (reverse) pal <- rev(pal)
-  # discrete_scale("colour", paste0("dreal_", palette), palette = pal, ...)
-  scale_color_manual(..., values = pal)
+  if (palette == "explore") {
+    colours <- unname(dreal_palettes[["discrete_long"]])
+    if (reverse) colours <- rev(colours)
+    pal <- grDevices::colorRampPalette(colours)
+    discrete_scale("colour", "explore",
+                            pal,
+                            ...)
+  } else {
+    pal <- unname(dreal_palettes[[palette]])
+    if (reverse) pal <- rev(pal)
+    # discrete_scale("colour", paste0("dreal_", palette), palette = pal, ...)
+    scale_colour_manual(..., values = pal)
+  }
 }
 
 #' @export
@@ -47,7 +60,7 @@ scale_colour_dreal_d <- scale_color_dreal_d
 #'
 #' @param palette Character name of palette in dreal_palettes
 #' @param reverse Boolean indicating whether the palette should be reversed
-#' @param ... Additional arguments passed to scale_fill_gradientn()
+#' @param ... Additional arguments passed to \code{ggplot2::\link[ggplot2]{scale_fill_gradientn}}
 #'
 #' @importFrom ggplot2 scale_fill_gradientn
 #' @export
@@ -64,11 +77,11 @@ scale_fill_dreal_c <- function(..., palette = "continuous", reverse = FALSE) {
 
 #' Discrete fill scale constructor for dreal colors
 #'
-#' @param palette Character name of palette in dreal_palettes
+#' @param palette Character name of palette in dreal_palettes or "explore" for high number of levels
 #' @param reverse Boolean indicating whether the palette should be reversed
-#' @param ... Additional arguments passed to scale_fill_manual()
+#' @param ... Additional arguments passed to \code{ggplot2::\link[ggplot2]{discrete_scale}}
 #'
-#' @importFrom ggplot2 scale_fill_manual
+#' @importFrom ggplot2 scale_fill_manual discrete_scale
 #' @export
 #'
 #' @examples
@@ -76,10 +89,23 @@ scale_fill_dreal_c <- function(..., palette = "continuous", reverse = FALSE) {
 #' ggplot(iris, aes(Sepal.Width, fill = Species)) +
 #'   geom_histogram(size = 4, bins = 20) +
 #'   scale_fill_dreal_d()
+#' # Long scales in exploration phase
+#' ggplot(iris, aes(Sepal.Width, fill = as.factor(1:nrow(iris)))) +
+#'   geom_histogram(size = 4, bins = 20, colour = NA) +
+#'   scale_fill_dreal_d(palette = "explore", guide = FALSE)
 scale_fill_dreal_d <- function(..., palette = "discrete", reverse = FALSE) {
-  pal <- unname(dreal_palettes[[palette]])
-  if (reverse) pal <- rev(pal)
-  # discrete_scale("colour", paste0("dreal_", palette), palette = pal, ...)
-  scale_fill_manual(..., values = pal)
+  if (palette == "explore") {
+    colours <- unname(dreal_palettes[["discrete_long"]])
+    if (reverse) colours <- rev(colours)
+    pal <- grDevices::colorRampPalette(colours)
+    discrete_scale("fill", "explore",
+                   pal,
+                   ...)
+  } else {
+    pal <- unname(dreal_palettes[[palette]])
+    if (reverse) pal <- rev(pal)
+    # discrete_scale("colour", paste0("dreal_", palette), palette = pal, ...)
+    scale_fill_manual(..., values = pal)
+  }
 }
 

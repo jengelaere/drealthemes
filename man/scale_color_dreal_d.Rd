@@ -8,9 +8,9 @@
 scale_color_dreal_d(..., palette = "discrete_long", reverse = FALSE)
 }
 \arguments{
-\item{...}{Additional arguments passed to scale_color_manual()}
+\item{...}{Additional arguments passed to \code{ggplot2::\link[ggplot2]{discrete_scale}}}
 
-\item{palette}{Character name of palette in dreal_palettes}
+\item{palette}{Character name of palette in dreal_palettes or "explore" for high number of levels}
 
 \item{reverse}{Boolean indicating whether the palette should be reversed}
 }
@@ -22,4 +22,8 @@ library(ggplot2)
 ggplot(iris, aes(Sepal.Width, Sepal.Length, color = Species)) +
    geom_point(size = 4) +
    scale_color_dreal_d()
+# Long scales in exploration phase
+ggplot(iris, aes(Sepal.Width, Sepal.Length, color = as.factor(1:nrow(iris)))) +
+  geom_point(size = 4) +
+  scale_color_dreal_d(palette = "explore", guide = FALSE)
 }

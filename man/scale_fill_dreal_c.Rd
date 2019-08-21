@@ -7,7 +7,7 @@
 scale_fill_dreal_c(..., palette = "continuous", reverse = FALSE)
 }
 \arguments{
-\item{...}{Additional arguments passed to scale_fill_gradientn()}
+\item{...}{Additional arguments passed to \code{ggplot2::\link[ggplot2]{scale_fill_gradientn}}}
 
 \item{palette}{Character name of palette in dreal_palettes}
 

@@ -155,11 +155,11 @@
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>...</th>
-      <td><p>Additional arguments passed to scale_fill_manual()</p></td>
+      <td><p>Additional arguments passed to <code>ggplot2::<a href='https://ggplot2.tidyverse.org/reference/discrete_scale.html'>discrete_scale</a></code></p></td>
     </tr>
     <tr>
       <th>palette</th>
-      <td><p>Character name of palette in dreal_palettes</p></td>
+      <td><p>Character name of palette in dreal_palettes or "explore" for high number of levels</p></td>
     </tr>
     <tr>
       <th>reverse</th>
@@ -172,7 +172,10 @@
     <pre class="examples"><div class='input'><span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/library'>library</a></span>(<span class='no'>ggplot2</span>)
 <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>Sepal.Width</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='no'>Species</span>)) +
   <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>20</span>) +
-  <span class='fu'>scale_fill_dreal_d</span>()</div><div class='img'><img src='scale_fill_dreal_d-1.png' alt='' width='700' height='433' /></div></pre>
+  <span class='fu'>scale_fill_dreal_d</span>()</div><div class='img'><img src='scale_fill_dreal_d-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># Long scales in exploration phase</span>
+<span class='fu'><a href='https://ggplot2.tidyverse.org/reference/ggplot.html'>ggplot</a></span>(<span class='no'>iris</span>, <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/aes.html'>aes</a></span>(<span class='no'>Sepal.Width</span>, <span class='kw'>fill</span> <span class='kw'>=</span> <span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/factor'>as.factor</a></span>(<span class='fl'>1</span>:<span class='fu'><a href='https://www.rdocumentation.org/packages/base/topics/nrow'>nrow</a></span>(<span class='no'>iris</span>)))) +
+  <span class='fu'><a href='https://ggplot2.tidyverse.org/reference/geom_histogram.html'>geom_histogram</a></span>(<span class='kw'>size</span> <span class='kw'>=</span> <span class='fl'>4</span>, <span class='kw'>bins</span> <span class='kw'>=</span> <span class='fl'>20</span>, <span class='kw'>colour</span> <span class='kw'>=</span> <span class='fl'>NA</span>) +
+  <span class='fu'>scale_fill_dreal_d</span>(<span class='kw'>palette</span> <span class='kw'>=</span> <span class='st'>"explore"</span>, <span class='kw'>guide</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</div><div class='img'><img src='scale_fill_dreal_d-2.png' alt='' width='700' height='433' /></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
     <h2>Contents</h2>
