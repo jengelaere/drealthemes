@@ -130,7 +130,8 @@ dreal_pal <- function(palette = "continuous", reverse = FALSE, ...) {
 }
 
 #' drealRampPaletteDiscrete
-drealRampPaletteDiscrete <- function (colors, ...)
+#' @param colors colors to interpolate; must be a valid argument to col2rgb().
+drealRampPaletteDiscrete <- function (colors)
 {
   # ramp <- colorRamp(colors, ...)
   function(n) {

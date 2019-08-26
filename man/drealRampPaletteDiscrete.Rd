@@ -4,7 +4,10 @@
 \alias{drealRampPaletteDiscrete}
 \title{drealRampPaletteDiscrete}
 \usage{
-drealRampPaletteDiscrete(colors, ...)
+drealRampPaletteDiscrete(colors)
+}
+\arguments{
+\item{colors}{colors to interpolate; must be a valid argument to col2rgb().}
 }
 \description{
 drealRampPaletteDiscrete
