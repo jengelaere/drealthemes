@@ -130,3 +130,16 @@ ggplot(mpg, aes(manufacturer, fill = manufacturer)) +
     scale_fill_dreal_d(palette = "discrete_long", guide = "none")
 ```
 
+## Exploration palette
+Increase size according to number of colours
+```{r, fig.width=8, fig.height=4, out.width="100%"}
+dreal_pal(palette = "explore")(5)
+# Long scales in exploration phase
+ggplot(iris, aes(Sepal.Width, fill = as.factor(1:nrow(iris)),
+                 colour = as.factor(1:nrow(iris)))) +
+  geom_histogram(size = 2, bins = 20) +
+  scale_fill_dreal_d(palette = "explore") + 
+  scale_colour_dreal_d(palette = "explore", reverse = TRUE)
+
+```
+

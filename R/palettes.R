@@ -114,9 +114,30 @@ list_dreal_pals <- function() {
 #' @examples
 #' dreal_pal("continuous")(6)
 dreal_pal <- function(palette = "continuous", reverse = FALSE, ...) {
-  pal <- dreal_palettes[[palette]]
+  if (palette == "explore") {
+    pal <- unname(dreal_palettes[["discrete_long"]])
+    if (reverse) pal <- rev(pal)
 
-  if (reverse) pal <- rev(pal)
+    drealRampPaletteDiscrete(pal, ...)
+  } else {
+    pal <- dreal_palettes[[palette]]
+    if (reverse) pal <- rev(pal)
 
-  colorRampPalette(pal, ...)
+    colorRampPalette(pal, ...)
+  }
+
+
+}
+
+#' drealRampPaletteDiscrete
+drealRampPaletteDiscrete <- function (colors, ...)
+{
+  # ramp <- colorRamp(colors, ...)
+  function(n) {
+    rep(colors, length.out = n)
+    # x <- ramp(seq.int(0, 1, length.out = n))
+    # if (ncol(x) == 4L)
+    #   rgb(x[, 1L], x[, 2L], x[, 3L], x[, 4L], maxColorValue = 255)
+    # else rgb(x[, 1L], x[, 2L], x[, 3L], maxColorValue = 255)
+  }
 }

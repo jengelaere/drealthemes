@@ -36,9 +36,10 @@ scale_colour_dreal_c <- scale_color_dreal_c
 #'   scale_color_dreal_d(palette = "explore", guide = FALSE)
 scale_color_dreal_d <- function(..., palette = "discrete_long", reverse = FALSE) {
   if (palette == "explore") {
-    colours <- unname(dreal_palettes[["discrete_long"]])
-    if (reverse) colours <- rev(colours)
-    pal <- grDevices::colorRampPalette(colours)
+    pal <- dreal_pal(palette = "explore", reverse = reverse)
+    # colours <- unname(dreal_palettes[["discrete_long"]])
+    # if (reverse) colours <- rev(colours)
+    # pal <- grDevices::colorRampPalette(colours)
     discrete_scale("colour", "explore",
                             pal,
                             ...)
@@ -95,9 +96,10 @@ scale_fill_dreal_c <- function(..., palette = "continuous", reverse = FALSE) {
 #'   scale_fill_dreal_d(palette = "explore", guide = FALSE)
 scale_fill_dreal_d <- function(..., palette = "discrete", reverse = FALSE) {
   if (palette == "explore") {
-    colours <- unname(dreal_palettes[["discrete_long"]])
-    if (reverse) colours <- rev(colours)
-    pal <- grDevices::colorRampPalette(colours)
+    pal <- dreal_pal(palette = "explore", reverse = reverse)
+    # colours <- unname(dreal_palettes[["discrete_long"]])
+    # if (reverse) colours <- rev(colours)
+    # pal <- grDevices::colorRampPalette(colours)
     discrete_scale("fill", "explore",
                    pal,
                    ...)
